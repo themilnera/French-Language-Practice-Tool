@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+body {
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
+	background-color: rgb(159, 160, 145);
+	font-family: 'Kameron', serif;
+	font-optical-sizing: auto;
+	font-weight: 600;
+	font-style: normal;
+	font-size: larger;
+	text-rendering: optimizeLegibility;
+}
+
+.animate__animated.animate__fadeIn {
+	--animation-delay: 1s;
+}
+
+button {
+	min-width: 150px;
+	color: rgb(255, 255, 255);
+	padding: 8px;
+	border-radius: 10px;
+	border-color: rgb(2, 60, 56);
+	background-color: rgb(0, 150, 100);
+}
+button:hover {
+	transform: translateY(-1px);
+	border-color: rgb(2, 52, 48);
+	background-color: rgb(42, 97, 80);
+	cursor: pointer;
+}
+
+h1 {
+	font-size: xx-large;
+}
+h2 {
+	font-size: x-large;
+}
+h3 {
+	font-size: large;
+}
+
+.menu {
+	background-color: rgb(210, 204, 186);
+}
+
+.loader {
+	--color-1: #000000;
+	--size: 2px;
+
+	width: calc(40 * var(--size));
+	height: calc(4 * var(--size));
+	border-radius: calc(2 * var(--size));
+	display: block;
+	margin: calc(30 * var(--size)) auto;
+	position: relative;
+	background: var(--color-1);
+	box-sizing: border-box;
+	animation: spin 1.2s linear infinite;
+}
+.loader::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: var(--color-1);
+	border-radius: inherit;
+	transform: rotate(90deg);
+	box-sizing: border-box;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
