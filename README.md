@@ -1,42 +1,10 @@
-# sv
+# Details
+I believe that LLMs are only useful as a tool inasmuch as they can be made to work with consistency. The key to doing that, in my opinion, is to have a deterministic structure. For practicing French, I could just have the LLM generate exercises from nothing, but those will be unpredictable, and it's hard to gauge whether it's giving you consistently useful and comprehensive study material, and that's the case even with something a LLM should be really good at: language.
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Therefore, what I'm building here is a simple app that uses a database of frequently used words as a practice guide. When the LLM generates a practice sentence, it'll be told exactly which word to focus on.
 
-## Creating a project
+## Why local LLMs?
+Because here, assuming you're using one that's well versed in French, a particularly large model would be overkill. Something smaller will do well enough if you're giving it a very small specific task like: "Generate a practice sentence with this verb."
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@0.16.3 create --template minimal --no-types --add prettier tailwindcss="plugins:typography,forms" --install npm fr-practice-tool
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Why LLMs at all?
+The benefit of having something that can read any sentence you input tell you where you made grammatical errors is obvious. An LLM, even a small one, can do that pretty consistently. Language is all they are really trained in. It's infinitely more difficult to code something that can do that with pattern matching and conditional statements.
