@@ -106,7 +106,8 @@
 				<button
 					onclick={() => {
 						menu = 'mode';
-					}}>Back</button
+					}}
+					class="red_button mt-15">Back</button
 				>
 			{/if}
 			<div class="text-md mt-auto">

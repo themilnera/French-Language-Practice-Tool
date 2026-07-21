@@ -33,6 +33,25 @@ button:hover {
 	cursor: pointer;
 }
 
+.red_button {
+	min-width: 150px;
+	color: rgb(255, 255, 255);
+	padding: 8px;
+	border-radius: 10px;
+	border-color: rgb(60, 2, 2);
+	background-color: rgb(150, 0, 0);
+}
+.red_button:hover {
+	transform: translateY(-1px);
+	border-color: rgb(52, 2, 2);
+	background-color: rgb(97, 42, 42);
+	cursor: pointer;
+}
+
+input {
+	border-radius: 8px;
+}
+
 h1 {
 	font-size: xx-large;
 }

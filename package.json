@@ -26,6 +26,7 @@
 		"vite": "^8.0.16"
 	},
 	"dependencies": {
-		"animate.css": "^4.1.1"
+		"animate.css": "^4.1.1",
+		"pg": "^8.22.0"
 	}
 }
