@@ -66,6 +66,14 @@ h3 {
 	background-color: rgb(210, 204, 186);
 }
 
+.checkbox {
+	border-radius: 3px;
+}
+
+option {
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
 .loader {
 	--color-1: #000000;
 	--size: 2px;
