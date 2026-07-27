@@ -1,4 +1,4 @@
-export default async function llmRequest(url, model, system, prompt) {
+export default async function llmRequest(url, model, system, prompt, temperature) {
 	try {
 		const res = await fetch(`http://${url}/api/generate`, {
 			method: 'POST',
@@ -6,7 +6,8 @@ export default async function llmRequest(url, model, system, prompt) {
 			body: JSON.stringify({
 				model: model,
 				prompt: prompt,
-				stream: false
+				stream: false,
+				options: { temperature: temperature }
 			})
 		});
 		const data = await res.json();
