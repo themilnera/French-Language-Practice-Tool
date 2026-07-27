@@ -47,6 +47,19 @@ button:hover {
 	background-color: rgb(97, 42, 42);
 	cursor: pointer;
 }
+.def_button {
+	background-color: rgb(134, 179, 165);
+	color: rgb(255, 255, 255);
+	padding: 8px;
+	border-radius: 10px;
+	border-color: rgb(2, 60, 24);
+}
+.def_button:hover {
+	background-color: rgb(123, 161, 151);
+	transform: translateY(-1px);
+	border-color: rgb(2, 52, 23);
+	cursor: pointer;
+}
 
 input {
 	border-radius: 8px;
