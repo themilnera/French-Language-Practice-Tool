@@ -41,15 +41,15 @@
 					>Definition:
 					<input name="definition" class="ml-2 h-8 w-full" />
 				</label>
-				<div class="flex items-center justify-between">
+				<div class="flex items-center justify-between gap-8">
 					<div class="flex items-center">
 						<label class="flex items-center justify-between text-lg"
-							>Pronomial?
+							>Pronomial:
 							<input type="checkbox" name="pronomial" class="checkbox ml-3" />
 						</label>
 					</div>
 					<label class="flex items-center gap-2 text-lg"
-						>Subtype
+						>Subtype:
 						<select name="subtype" class="rounded-2xl">
 							<option value="">None</option>
 							<option value="technical">Technical</option>
@@ -59,7 +59,7 @@
 						</select>
 					</label>
 				</div>
-				<button class="red_button mt-5 w-[50%] self-center" type="submit">Submit</button>
+				<button class="mt-5 w-[50%] self-center" type="submit">Submit</button>
 			</form>
 		</div>
 	</div>
