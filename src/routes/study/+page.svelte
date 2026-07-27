@@ -121,9 +121,9 @@
 	</div>
 {:else}
 	<div class="flex flex-col items-center justify-center">
-		<div class="mt-10 flex h-100 w-[80%] flex-col items-center rounded-2xl bg-red-50 p-3">
+		<div class="mt-10 flex h-180 w-[80%] flex-col items-center rounded-2xl bg-red-50 p-3">
 			<h1 class="flex-1">{selectedVerb.infinitive}</h1>
-			<div class="w-full flex-6">
+			<div class="flex w-full flex-6 flex-col">
 				<select bind:value={selectedDefinition}>
 					{#each selectedVerb.definitions as d}
 						<option value={d.definition}>
@@ -132,105 +132,221 @@
 						</option>
 					{/each}
 				</select>
-				<div class="flex-1">
-					<form>
-						<input
-							bind:group={selectedSubject}
-							name="subject"
-							type="radio"
-							id="je"
-							value="je"
-							checked
-						/>
-						<label for="je">je</label>
+				<div class="">
+					<form class="mt-2 flex flex-col items-center gap-2">
+						<div class="flex gap-4">
+							<label for="je"
+								><input
+									bind:group={selectedSubject}
+									name="subject"
+									type="radio"
+									id="je"
+									value="je"
+									checked
+									class="mr-2"
+								/>je</label
+							>
 
-						<input bind:group={selectedSubject} type="radio" id="tu" value="tu" />
-						<label for="tu">tu</label>
+							<label for="tu"
+								><input
+									bind:group={selectedSubject}
+									type="radio"
+									id="tu"
+									value="tu"
+									class="mr-2"
+								/>tu</label
+							>
 
-						<input bind:group={selectedSubject} type="radio" id="on" value="on" />
-						<label for="on">on</label>
+							<label for="on"
+								><input
+									bind:group={selectedSubject}
+									type="radio"
+									id="on"
+									value="on"
+									class="mr-2"
+								/>on</label
+							>
 
-						<input bind:group={selectedSubject} type="radio" id="vous" value="vous" />
-						<label for="vous">vous</label>
+							<label for="vous"
+								><input
+									bind:group={selectedSubject}
+									type="radio"
+									id="vous"
+									value="vous"
+									class="mr-2"
+								/>vous</label
+							>
 
-						<input bind:group={selectedSubject} type="radio" id="il" value="il" />
-						<label for="il">il</label>
+							<label for="il"
+								><input
+									bind:group={selectedSubject}
+									type="radio"
+									id="il"
+									value="il"
+									class="mr-2"
+								/>il</label
+							>
+						</div>
+						<div class="flex gap-5">
+							<label for="elle"
+								><input
+									bind:group={selectedSubject}
+									type="radio"
+									id="elle"
+									value="elle"
+									class="mr-2"
+								/>elle</label
+							>
+							<label for="ils"
+								><input
+									bind:group={selectedSubject}
+									type="radio"
+									id="ils"
+									value="ils"
+									class="mr-2"
+								/>ils</label
+							>
 
-						<input bind:group={selectedSubject} type="radio" id="elle" value="elle" />
-						<label for="elle">elle</label>
+							<label for="elles"
+								><input
+									bind:group={selectedSubject}
+									type="radio"
+									id="elles"
+									value="elles"
+									class="mr-2"
+								/>elles</label
+							>
 
-						<input bind:group={selectedSubject} type="radio" id="ils" value="ils" />
-						<label for="ils">ils</label>
-
-						<input bind:group={selectedSubject} type="radio" id="elles" value="elles" />
-						<label for="elles">elles</label>
-
-						<input bind:group={selectedSubject} type="radio" id="nous" value="nous" />
-						<label for="nous">nous</label>
+							<label for="nous"
+								><input
+									bind:group={selectedSubject}
+									type="radio"
+									id="nous"
+									value="nous"
+									class="mr-2"
+								/>nous</label
+							>
+						</div>
 					</form>
 				</div>
 				<div class="mt-10 flex-1">
-					<form>
-						<input
-							bind:group={selectedTense}
-							name="subject"
-							type="radio"
-							id="présent"
-							value="présent"
-							checked
-						/>
-						<label for="présent">présent</label>
+					<form class="flex justify-between text-lg">
+						<div class="flex flex-col flex-wrap gap-2">
+							<label for="présent"
+								><input
+									bind:group={selectedTense}
+									name="subject"
+									type="radio"
+									id="présent"
+									value="présent"
+									class="mr-2"
+									checked
+								/>présent</label
+							>
 
-						<input
-							bind:group={selectedTense}
-							type="radio"
-							id="passé composé"
-							value="passé composé"
-						/>
-						<label for="passé composé">passé composé</label>
+							<label for="passé composé"
+								><input
+									bind:group={selectedTense}
+									type="radio"
+									id="passé composé"
+									value="passé composé"
+									class="mr-2"
+								/>passé composé</label
+							>
 
-						<input bind:group={selectedTense} type="radio" id="imparfait" value="imparfait" />
-						<label for="imparfait">imparfait</label>
+							<label for="imparfait"
+								><input
+									bind:group={selectedTense}
+									type="radio"
+									id="imparfait"
+									value="imparfait"
+									class="mr-2"
+								/>imparfait</label
+							>
 
-						<input bind:group={selectedTense} type="radio" id="futur proche" value="futur proche" />
-						<label for="futur proche">futur proche</label>
+							<label for="futur proche"
+								><input
+									bind:group={selectedTense}
+									type="radio"
+									id="futur proche"
+									value="futur proche"
+									class="mr-2"
+								/>futur proche</label
+							>
 
-						<input bind:group={selectedTense} type="radio" id="futur simple" value="futur simple" />
-						<label for="future simple">futur simple</label>
+							<label for="future simple"
+								><input
+									bind:group={selectedTense}
+									type="radio"
+									id="futur simple"
+									value="futur simple"
+									class="mr-2"
+								/>futur simple</label
+							>
+							<label for="subjonctif"
+								><input
+									bind:group={selectedTense}
+									type="radio"
+									id="subjonctif"
+									value="subjonctif"
+									class="mr-2"
+								/>subjonctif</label
+							>
+						</div>
+						<div class="flex flex-col flex-wrap gap-2">
+							<label for="conditionnel">
+								<input
+									bind:group={selectedTense}
+									type="radio"
+									id="conditionnel"
+									value="conditionnel"
+									class="mr-2"
+								/>conditionnel</label
+							>
 
-						<input bind:group={selectedTense} type="radio" id="subjonctif" value="subjonctif" />
-						<label for="subjonctif">subjonctif</label>
+							<label for="passé conditionnel"
+								><input
+									bind:group={selectedTense}
+									type="radio"
+									id="passé conditionnel"
+									value="passé conditionnel"
+									class="mr-2"
+								/>passé conditionnel</label
+							>
 
-						<input bind:group={selectedTense} type="radio" id="conditionnel" value="conditionnel" />
-						<label for="conditionnel">conditionnel</label>
+							<label for="plus-que-parfait"
+								><input
+									bind:group={selectedTense}
+									type="radio"
+									id="plus-que-parfait"
+									value="plus-que-parfait"
+									class="mr-2"
+								/>plus-que-parfait</label
+							>
 
-						<input
-							bind:group={selectedTense}
-							type="radio"
-							id="passé conditionnel"
-							value="passé conditionnel"
-						/>
-						<label for="passé conditionnel">passé conditionnel</label>
-
-						<input
-							bind:group={selectedTense}
-							type="radio"
-							id="plus-que-parfait"
-							value="plus-que-parfait"
-						/>
-						<label for="plus-que-parfait">plus-que-parfait (past perfect)</label>
-						<input
-							bind:group={selectedTense}
-							type="radio"
-							id="futur parfait"
-							value="futur parfait"
-						/>
-						<label for="futur parfait">futur parfait</label>
-						<input bind:group={selectedTense} type="radio" id="imperatif" value="imperatif" />
-						<label for="imperatif">imperatif</label>
+							<label for="futur parfait"
+								><input
+									bind:group={selectedTense}
+									type="radio"
+									id="futur parfait"
+									value="futur parfait"
+									class="mr-2"
+								/>futur parfait</label
+							>
+							<label for="imperatif">
+								<input
+									bind:group={selectedTense}
+									class="mr-2"
+									type="radio"
+									id="imperatif"
+									value="imperatif"
+								/>imperatif</label
+							>
+						</div>
 					</form>
 				</div>
 			</div>
+			<button>Generate Example Sentence</button>
 		</div>
 	</div>
 {/if}
