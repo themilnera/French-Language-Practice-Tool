@@ -2,6 +2,7 @@
 	import 'animate.css';
 	import { localStore } from '$lib/localStore.svelte.js';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import llmRequest from '$lib/llmRequest';
 	let error_message = $state('');
 
@@ -93,7 +94,7 @@
 			{#if menu == 'mode'}
 				<button
 					onclick={() => {
-						menu = 'test';
+						goto('/study');
 					}}
 					class="mt-30 mb-1">Study Mode</button
 				>

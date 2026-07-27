@@ -3,12 +3,12 @@ import { pool } from '$lib/postgres/pool.js';
 
 export async function POST({ request }) {
 	const body = await request.json();
-	console.log(body);
 	const { infinitive, pronomial, subtype, definition } = body;
 	let pronomial_final = pronomial;
 	if (pronomial == null || pronomial == '') {
 		pronomial_final = false;
 	}
+	console.log(body);
 	console.log('Attempting to insert verb into table.');
 	try {
 		const result = await pool.query(

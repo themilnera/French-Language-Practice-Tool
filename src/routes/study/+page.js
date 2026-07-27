@@ -7,6 +7,5 @@ export const load = async ({ fetch, params }) => {
 		}
 	});
 	const verbs = await response.json();
-	console.log(verbs);
 	return { verbs };
 };
