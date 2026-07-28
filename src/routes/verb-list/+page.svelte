@@ -90,6 +90,7 @@
 							<option value="reflexive">Reflexive</option>
 							<option value="reciprocal">Reciprocal</option>
 							<option value="figurative">Figurative</option>
+							<option value="informal">Informal</option>
 						</select>
 					</label>
 				</div>
