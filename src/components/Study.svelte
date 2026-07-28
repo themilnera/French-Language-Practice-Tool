@@ -11,6 +11,7 @@
 	let generatedText = $state('');
 	let generating = $state(false);
 
+	//url slug
 	let slug = $derived(decodeURIComponent(page.url.pathname.split('/study/')[1]) ?? null);
 	let selectedVerb = $derived(page.state.verb ?? null);
 
@@ -46,32 +47,54 @@
 	}
 
 	function deriveList(initialList) {
-		let finalList = [];
+		initialList.sort((a, b) => {
+			if (a.infinitive === b.infinitive && a.pronomial && !b.pronomial) {
+				return 1;
+			} else if (a.infinitive === b.infinitive && !a.pronomial && b.pronomial) {
+				return -1;
+			} else {
+				return 0;
+			}
+		}); //sorting just in case so that all the pronomials are together
+
+		let list = [];
 		let infinitive = '';
 		let pronomial = false;
 		let subtype = '';
 		let definitions = [];
 
 		for (let i = 0; i < initialList.length; i++) {
-			if (i === 0) {
-				infinitive = initialList[i].infinitive;
-				pronomial = initialList[i].pronomial;
-				definitions = [{ definition: initialList[i].definition, subtype: initialList[i].subtype }];
-			} else if (initialList[i - 1].infinitive !== initialList[i].infinitive) {
-				finalList.push({ infinitive, pronomial, subtype, definitions });
-				infinitive = initialList[i].infinitive;
-				pronomial = initialList[i].pronomial;
-				subtype = initialList[i].subtype;
-				definitions = [{ definition: initialList[i].definition, subtype: initialList[i].subtype }];
-			} else if (initialList[i - 1].infinitive === initialList[i].infinitive) {
+			let currentVerb = initialList[i];
+			let lastVerb = null;
+			if (i > 0) {
+				lastVerb = initialList[i - 1];
+			}
+			if (
+				//first row, or new infinitive, or new pronomial version
+				!lastVerb ||
+				currentVerb.infinitive !== lastVerb.infinitive ||
+				(currentVerb.infinitive === lastVerb.infinitive &&
+					currentVerb.pronomial !== lastVerb.pronomial)
+			) {
+				if (lastVerb) {
+					list.push({ infinitive, pronomial, subtype, definitions });
+				}
+				infinitive = currentVerb.infinitive;
+				pronomial = currentVerb.pronomial;
+				definitions = [{ definition: currentVerb.definition, subtype: currentVerb.subtype }];
+			} else if (
+				currentVerb.infinitive === lastVerb.infinitive &&
+				currentVerb.pronomial === lastVerb.pronomial
+			) {
 				definitions.push({
 					definition: initialList[i].definition,
 					subtype: initialList[i].subtype
 				});
 			}
 		}
-		finalList.push({ infinitive, pronomial, subtype, definitions });
-		return finalList;
+		list.push({ infinitive, pronomial, subtype, definitions });
+
+		return list;
 	}
 
 	function changeFilter() {
@@ -151,7 +174,7 @@
 									{#if verb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(verb.infinitive[0])}
 										<span class="text-pink-600">S'</span>
 									{:else if verb.pronomial}
-										<span class="text-pink-600">Se </span>
+										<span class="text-pink-600">Se&nbsp;</span>
 									{/if}{verb.infinitive}
 								</span>
 
