@@ -117,7 +117,7 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<div class="max-w-200 xl:w-[40%]">
+	<div class="w-130 max-w-200 xl:w-[50%]">
 		{#if !selectedVerb}
 			<div class="flex h-screen flex-col justify-center bg-amber-50">
 				<div class="mt-5 mb-5 self-center">
@@ -168,7 +168,7 @@
 			</div>
 		{:else}
 			<div class="flex flex-col items-center justify-center">
-				<div class="mt-10 flex h-180 w-[80%] flex-col items-center rounded-2xl bg-amber-50 p-3">
+				<div class="mt-10 flex h-190 w-[80%] flex-col items-center rounded-2xl bg-amber-50 p-3">
 					<h1 class="flex-1">{selectedVerb.infinitive}</h1>
 					<div class="mb-5 flex w-full flex-6 flex-col items-center">
 						<select bind:value={selectedDefinition} class="w-[50%]">
@@ -179,8 +179,8 @@
 								</option>
 							{/each}
 						</select>
-						<div class="">
-							<form class="mt-2 flex flex-col items-center gap-2">
+						<div class="border-b border-b-mist-500 pb-2">
+							<form class="mt-3 flex flex-col items-center gap-2">
 								<div class="flex gap-4">
 									<label for="je"
 										><input
@@ -276,8 +276,8 @@
 								</div>
 							</form>
 						</div>
-						<div class="mt-10 flex w-full flex-1 flex-col items-center">
-							<form class="flex w-[70%] justify-between text-lg">
+						<div class="mt-7 flex w-full flex-1 flex-col items-center">
+							<form class="flex w-[90%] justify-between text-[15px]">
 								<div class="flex flex-col flex-wrap gap-2">
 									<label for="présent"
 										><input
@@ -393,11 +393,19 @@
 							</form>
 						</div>
 					</div>
-					<div class="h-full p-3" contenteditable="false" bind:innerText={generatedText}></div>
+					{#if generatedText !== ''}
+						<div
+							class="mt-3 h-full rounded-2xl border border-gray-400 bg-white p-3"
+							contenteditable="false"
+							bind:innerText={generatedText}
+						></div>
+					{/if}
 					{#if !generating}
-						<button onclick={generateSentence}>Generate Example Sentence</button>
+						<button class="mt-4 mb-3 text-[19px]" onclick={generateSentence}
+							>Generate Example</button
+						>
 					{:else}
-						<div class="loader"></div>
+						<div class="ellipsis-anim mt-4 mb-3 w-[50%] self-center text-[19px]">Generating</div>
 					{/if}
 				</div>
 			</div>
