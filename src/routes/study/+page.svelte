@@ -34,7 +34,7 @@
 			api_model,
 			"Tu es un générateur de phrases d'exemple en français pour un apprenant de la langue française. Tu dois répondre UNIQUEMENT avec la phrase générée, rien d'autre. Pas d'explication, pas de traduction, pas de guillemets, pas de commentaire — seulement la phrase elle-même. La phrase doit impérativement correspondre à l'usage, au sujet et au temps demandés.",
 			`Génère une phrase d'exemple avec le verbe : ${selectedVerb.infinitive}, correspondant à cet usage : ${selectedDefinition}, en utilisant le sujet : ${selectedSubject} et le temps : ${selectedTense}.\n\nMaintenant, voici la phrase: `,
-			0.2
+			0.9
 		);
 		generatedText = response;
 		generating = false;
@@ -65,6 +65,7 @@
 				});
 			}
 		}
+		finalList.push({ infinitive, pronomial, subtype, definitions });
 		return finalList;
 	}
 
@@ -106,7 +107,7 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<div class="w-200 max-w-200">
+	<div class="max-w-200 md:w-[40%]">
 		{#if !selectedVerb}
 			<div class="flex h-screen flex-col justify-center bg-amber-50">
 				<div class="mt-5 mb-5 self-center">
@@ -157,10 +158,10 @@
 			</div>
 		{:else}
 			<div class="flex flex-col items-center justify-center">
-				<div class="mt-10 flex h-180 w-[80%] flex-col items-center rounded-2xl bg-red-50 p-3">
+				<div class="mt-10 flex h-180 w-[80%] flex-col items-center rounded-2xl bg-amber-50 p-3">
 					<h1 class="flex-1">{selectedVerb.infinitive}</h1>
-					<div class="flex w-full flex-6 flex-col">
-						<select bind:value={selectedDefinition}>
+					<div class="mb-5 flex w-full flex-6 flex-col items-center">
+						<select bind:value={selectedDefinition} class="w-[50%]">
 							{#each selectedVerb.definitions as d}
 								<option value={d.definition}>
 									{d.definition}
@@ -265,8 +266,8 @@
 								</div>
 							</form>
 						</div>
-						<div class="mt-10 flex-1">
-							<form class="flex justify-between text-lg">
+						<div class="mt-10 flex w-full flex-1 flex-col items-center">
+							<form class="flex w-[70%] justify-between text-lg">
 								<div class="flex flex-col flex-wrap gap-2">
 									<label for="présent"
 										><input
@@ -382,7 +383,7 @@
 							</form>
 						</div>
 					</div>
-					<div contenteditable="false" bind:innerText={generatedText}></div>
+					<div class="h-full p-3" contenteditable="false" bind:innerText={generatedText}></div>
 					{#if !generating}
 						<button onclick={generateSentence}>Generate Example Sentence</button>
 					{:else}
