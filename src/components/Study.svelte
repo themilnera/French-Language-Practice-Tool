@@ -11,7 +11,7 @@
 	let generatedText = $state('');
 	let generating = $state(false);
 
-	let slug = $derived(page.url.pathname.split('/study/')[1] ?? null);
+	let slug = $derived(decodeURIComponent(page.url.pathname.split('/study/')[1]) ?? null);
 	let selectedVerb = $derived(page.state.verb ?? null);
 
 	let { data } = $props();
@@ -24,10 +24,10 @@
 	let selectedDefinition = $state('');
 	let sdClass = $state('def_button');
 
-	let selectedSubject = $state('');
+	let selectedSubject = $state('je');
 	let sdSubject = $state('');
 
-	let selectedTense = $state('');
+	let selectedTense = $state('présent');
 
 	async function generateSentence() {
 		generating = true;
@@ -106,6 +106,9 @@
 	}
 	onMount(() => {
 		loadAll();
+		if (slug !== null && slug !== '') {
+			selectedVerb = fullList.find((v) => slug.toLowerCase() === v.infinitive.toLowerCase());
+		}
 	});
 	$effect(() => {
 		if (selectedVerb) {
