@@ -15,7 +15,9 @@
 	let selectedVerb = $derived(page.state.verb ?? null);
 
 	let { data } = $props();
-	let fullList = $derived(deriveList(data?.verbs) ?? []);
+	let fullList = $derived(
+		deriveList(data?.verbs?.sort((a, b) => a.infinitive.localeCompare(b.infinitive))) ?? []
+	);
 	let list = $derived(fullList ?? []);
 
 	let filterInput = $state('');
@@ -36,7 +38,7 @@
 			`${api_url}`,
 			api_model,
 			"Tu es un générateur de phrases d'exemple en français pour un apprenant de la langue française. Tu dois répondre UNIQUEMENT avec la phrase générée, rien d'autre. Pas d'explication, pas de traduction, pas de guillemets, pas de commentaire — seulement la phrase elle-même. La phrase doit impérativement correspondre à l'usage, au sujet et au temps demandés.",
-			`Génère une phrase d'exemple avec le verbe : ${selectedVerb.infinitive}, correspondant à cet usage : ${selectedDefinition}, en utilisant le sujet : ${selectedSubject} et le temps : ${selectedTense}.\n\nMaintenant, voici la phrase: `,
+			`Génère une phrase d'exemple avec le verbe : ${selectedVerb.pronomial ? "se/s' " : ''}${selectedVerb.infinitive}, correspondant à cet usage : ${selectedDefinition}, en utilisant le sujet : ${selectedSubject} et le temps : ${selectedTense}.\n\nMaintenant, voici la phrase: `,
 			0.9
 		);
 		generatedText = response;
@@ -148,6 +150,8 @@
 								<span class="mt-4 font-bold text-blue-800">
 									{#if verb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(verb.infinitive[0])}
 										<span class="text-pink-600">S'</span>
+									{:else if verb.pronomial}
+										<span class="text-pink-600">Se </span>
 									{/if}{verb.infinitive}
 								</span>
 
@@ -172,7 +176,14 @@
 		{:else}
 			<div class="flex flex-col items-center justify-center">
 				<div class="mt-10 flex h-190 w-[80%] flex-col items-center rounded-2xl bg-amber-50 p-3">
-					<h1 class="flex-1">{selectedVerb.infinitive}</h1>
+					<h1 class="flex-1">
+						{#if selectedVerb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(selectedVerb.infinitive[0])}
+							<span class="text-pink-600">S'</span>
+						{:else if selectedVerb.pronomial}
+							<span class="text-pink-600">Se</span>
+						{/if}
+						{selectedVerb.infinitive}
+					</h1>
 					<div class="mb-5 flex w-full flex-6 flex-col items-center">
 						<select bind:value={selectedDefinition} class="w-[50%]">
 							{#each selectedVerb.definitions as d}

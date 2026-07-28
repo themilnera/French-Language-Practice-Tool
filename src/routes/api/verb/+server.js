@@ -19,13 +19,41 @@ export async function POST({ request }) {
         `,
 			[infinitive, pronomial_final, subtype, definition]
 		);
-		return new json({ success: 'Successfully inserted data.', status: 201 });
+		return json({ success: 'Successfully inserted data.' }, { status: 201 });
 	} catch (error) {
 		console.error('Database error: ', error);
 	}
 	console.log(
 		`Created verb entry:\nVerb: ${infinitive}\nPronm?: ${pronomial}\nSubtype?: ${subtype}\nDefinition: ${definition}`
 	);
+}
+
+export async function PUT({ request }) {
+	const body = await request.json();
+	const { infinitive, pronomial, subtype, definition, id } = body;
+	let pronomial_final = pronomial;
+	if (pronomial == null || pronomial == '') {
+		pronomial_final = false;
+	}
+	console.log('Attempting to update verb in table.');
+	try {
+		const result = await pool.query(
+			`
+            UPDATE verb 
+			SET infinitive = $1,
+			pronomial = $2,
+			subtype = $3,
+			definition = $4
+			WHERE id = $5
+            RETURNING * 
+        `,
+			[infinitive, pronomial_final, subtype, definition, id]
+		);
+		console.log('Success');
+		return json({ success: 'Successfully inserted data.' }, { status: 201 });
+	} catch (error) {
+		console.error('Database error: ', error);
+	}
 }
 
 export async function GET({ request }) {
