@@ -114,6 +114,12 @@
 			<div class="text-md mt-auto">
 				<p class="text-blue-700">{api_url}</p>
 				<p class="text-blue-700">{api_model}</p>
+				<button
+					class="red_button"
+					onclick={() => {
+						local_api.value = '';
+					}}>Reset</button
+				>
 			</div>
 		</div>
 	</div>

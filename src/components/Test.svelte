@@ -21,11 +21,11 @@
 			'conditionnel',
 			'passé conditionnel',
 			'plus-que-parfait',
-			'futur parfait',
-			'imperatif'
+			'futur parfait'
 		])
 	);
-	let testing = $state(false);
+	let started = $state(false);
+	let checking = $state(false);
 	let generating = $state(false);
 	let currentVerb = $state(null);
 	let currentSubject = $state('');
@@ -37,21 +37,26 @@
 	let subIndex = $state(0);
 	let tenseIndex = $state(0);
 
+	let nextButtonText = $derived(checking ? 'Next Verb' : !started ? 'Start' : 'Skip');
+
 	async function gradeChallenge() {
+		checking = true;
 		generating = true;
-		console.log('Generating...');
 		let response = await llmRequest(
 			`${api_url}`,
 			api_model,
-			"Tu es un correcteur de phrases françaises. Ta seule tâche est de corriger la phrase fournie par l'étudiant selon le verbe, le sujet et le temps donnés.",
-			`Voici la phrase de l'étudiant: ${inputSentence}`,
-			0.9
-		);
-		console.log(response);
-		responseField = response;
+			`RESPOND IN PlAINTEXT ONLY. A student is learning french. They've been told to write a sentence using a verb, in a specific tense, with a specific subject. Your job is to check whether their sentence is correct, provide the corrected version if not, and an explanation if necessary.`,
+			`Verb:${currentVerb}, Subject ${currentSubject}, Tense ${currentTense}, The student's sentence: ${inputSentence}.\nMy response: `,
+			0.4
+		); //gonna need to decide, more restrictive? Lower temp + less tokens perhaps
+		//we could json mode this perhaps as well, but I don't know
 		generating = false;
+		responseField = response;
 	}
 	function getTest() {
+		responseField = '';
+		started = true;
+		checking = false;
 		if (infIndex >= fullList.length) {
 			infIndex = 0;
 		}
@@ -91,24 +96,41 @@
 <div class="flex flex-col items-center">
 	<div class="w-130 max-w-200 xl:w-[50%]">
 		<div class="flex h-screen flex-col items-center bg-amber-50">
-			<h1 class="mt-5">Verb Tester</h1>
-			<div class="mt-10 flex h-[50%] w-[80%] flex-col items-center rounded-2xl bg-white">
-				<p class="p-10 text-left">Learn by writing sentences using common verbs.</p>
+			<h1 class="mt-20">Verb Tester</h1>
+			{#if started}
+				<div class="mt-10 flex h-[50%] w-[80%] flex-col items-center rounded-2xl bg-amber-50">
+					<div
+						class="flex w-100 flex-1 flex-col rounded-2xl bg-blue-900 p-5 text-center text-white"
+					>
+						<h3>Write a sentence using...</h3>
+						<div class="flex items-center justify-between border-b border-white">
+							<span class="text-2xl text-purple-300">Verb:</span>
+							<span>{currentVerb?.infinitive}</span>
+						</div>
+						<div class="flex items-center justify-between border-b border-white">
+							<span class="text-2xl text-red-400">Subject:</span>
+							<span class="">{currentSubject}</span>
+						</div>
+						<div class="flex items-center justify-between border-b border-white">
+							<span class="text-2xl text-cyan-300">Tense:</span><span>{currentTense}</span>
+						</div>
+					</div>
 
-				<div>Verb: {currentVerb?.infinitive}</div>
-				<div>Subject: {currentSubject}</div>
-				<div>Tense: {currentTense}</div>
-				<div></div>
-				<div
-					class="m-5 h-full w-full overflow-auto rounded-2xl border-2 p-3 text-sm"
-					contenteditable="false"
-					bind:innerText={responseField}
-				></div>
-			</div>
-			<input class="w-[90%]" bind:value={inputSentence} />
+					{#if responseField !== ''}
+						<div
+							class="m-5 h-full w-full flex-1 overflow-auto rounded-2xl border bg-white p-3 text-sm"
+							contenteditable="false"
+							bind:innerText={responseField}
+						></div>
+					{/if}
+				</div>
+				<input class="mt-5 w-[80%]" bind:value={inputSentence} />
+			{/if}
 			<div class="w-80% mb-3 flex items-center justify-center gap-3 pt-5">
-				<button class="flex-5 text-lg!" onclick={gradeChallenge}>Grade My Sentence</button>
-				<button class="red_button flex-1 text-lg!" onclick={getTest}>Next Challenge</button>
+				{#if !checking && started}
+					<button class="flex-5 text-lg!" onclick={gradeChallenge}>Correct My Sentence</button>
+				{/if}
+				<button class="red_button flex-1 text-lg!" onclick={getTest}>{nextButtonText}</button>
 			</div>
 		</div>
 	</div>

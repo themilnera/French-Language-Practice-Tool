@@ -96,7 +96,7 @@
 <div class="flex flex-col items-center">
 	<div class="w-130 max-w-200 xl:w-[50%]">
 		{#if !selectedVerb}
-			<div class="flex h-screen flex-col justify-center bg-amber-50">
+			<div class="mt-10 flex h-210 flex-col items-center rounded-2xl bg-amber-50 pb-10">
 				<div class="mt-5 mb-5 self-center">
 					<input
 						placeholder="Find a verb to practice..."
@@ -105,7 +105,7 @@
 					/>
 				</div>
 				<div
-					class="flex min-h-0 w-full flex-1 flex-col items-start overflow-auto border-b-2 bg-red-50 p-5 md:border-l-2"
+					class="flex h-[90%] min-h-0 w-full flex-1 flex-col items-start overflow-auto rounded-2xl bg-red-50 p-5"
 				>
 					{#if fullList.length !== 0}
 						{#each list as verb, index}
@@ -129,7 +129,7 @@
 
 								<div class="flex w-full rounded-xl bg-red-200 p-3">
 									<div class="ml-auto w-full">
-										<div class="flex flex-col justify-between text-[3vw] md:text-lg">
+										<div class="xs:text-[3vw] flex flex-col justify-between text-[17px]">
 											{#each verb.definitions as d}
 												<span class="flex justify-between pt-1"
 													>{d.definition}
