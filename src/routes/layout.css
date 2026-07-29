@@ -47,6 +47,21 @@ button:hover {
 	background-color: rgb(97, 42, 42);
 	cursor: pointer;
 }
+.blue_button {
+	min-width: 150px;
+	color: rgb(255, 255, 255);
+	padding: 8px;
+	border-radius: 10px;
+	border-color: rgb(2, 37, 60);
+	background-color: rgb(0, 77, 150);
+}
+.blue_button:hover {
+	transform: translateY(-1px);
+	border-color: rgb(2, 24, 52);
+	background-color: rgb(42, 75, 97);
+	cursor: pointer;
+}
+
 .def_button {
 	background-color: rgb(134, 179, 165);
 	color: rgb(255, 255, 255);

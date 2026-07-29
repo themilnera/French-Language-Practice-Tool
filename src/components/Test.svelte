@@ -45,7 +45,7 @@
 		let response = await llmRequest(
 			`${api_url}`,
 			api_model,
-			`RESPOND IN PlAINTEXT ONLY. A student is learning french. They've been told to write a sentence using a verb, in a specific tense, with a specific subject. Your job is to check whether their sentence is correct, provide the corrected version if not, and an explanation if necessary.`,
+			`RESPOND IN PlAINTEXT ONLY, NO FORMATTING, ASTERISKS, ETC. A student is learning french. They've been told to write a sentence using a verb, in a specific tense, with a specific subject. Your job is to check whether their sentence is correct, provide the corrected version if not, and an explanation if necessary.`,
 			`Verb:${currentVerb}, Subject ${currentSubject}, Tense ${currentTense}, The student's sentence: ${inputSentence}.\nMy response: `,
 			0.4
 		); //gonna need to decide, more restrictive? Lower temp + less tokens perhaps
@@ -55,6 +55,7 @@
 	}
 	function getTest() {
 		responseField = '';
+		inputSentence = '';
 		started = true;
 		checking = false;
 		if (infIndex >= fullList.length) {
@@ -95,7 +96,7 @@
 
 <div class="flex flex-col items-center">
 	<div class="w-130 max-w-200 xl:w-[50%]">
-		<div class="flex h-screen flex-col items-center bg-amber-50">
+		<div class="mt-10 flex h-210 flex-col items-center rounded-2xl bg-amber-50">
 			<h1 class="mt-20">Verb Tester</h1>
 			{#if started}
 				<div class="mt-10 flex h-[50%] w-[80%] flex-col items-center rounded-2xl bg-amber-50">

@@ -31,6 +31,7 @@
 	let sdSubject = $state('');
 
 	let selectedTense = $state('présent');
+	let imperative = $derived(selectedTense === 'imperatif' ? true : false);
 
 	async function generateSentence() {
 		generating = true;
@@ -38,9 +39,9 @@
 		let response = await llmRequest(
 			`${api_url}`,
 			api_model,
-			"Tu es un générateur de phrases d'exemple en français pour un apprenant de la langue française. Tu dois répondre UNIQUEMENT avec la phrase générée, rien d'autre. Pas d'explication, pas de traduction, pas de guillemets, pas de commentaire — seulement la phrase elle-même. La phrase doit impérativement correspondre à l'usage, au sujet et au temps demandés.",
-			`Génère une phrase d'exemple avec le verbe : ${selectedVerb.pronomial ? "se/s' " : ''}${selectedVerb.infinitive}, correspondant à cet usage : ${selectedDefinition}, en utilisant le sujet : ${selectedSubject} et le temps : ${selectedTense}.\n\nMaintenant, voici la phrase: `,
-			0.9
+			"Tu es un générateur de phrases d'exemple en français pour un apprenant de la langue française. Tu dois répondre UNIQUEMENT avec la phrase générée, rien d'autre. La phrase doit impérativement correspondre à l'usage, au sujet et au temps demandés.",
+			`Génère une phrase d'exemple avec le verbe : ${selectedVerb.pronomial ? "se/s' " : ''}${selectedVerb.infinitive}, correspondant à cet usage : ${selectedDefinition}, en utilisant le sujet : ${selectedSubject} et le temps : ${selectedTense}.\n`,
+			0.3
 		);
 		generatedText = response;
 		generating = false;
@@ -94,9 +95,9 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<div class="w-130 max-w-200 xl:w-[50%]">
+	<div class="flex w-130 max-w-200 justify-center xl:w-[50%]">
 		{#if !selectedVerb}
-			<div class="mt-10 flex h-210 flex-col items-center rounded-2xl bg-amber-50 pb-10">
+			<div class="mt-10 flex h-210 w-[90%] flex-col items-center rounded-2xl bg-amber-50 pb-10">
 				<div class="mt-5 mb-5 self-center">
 					<input
 						placeholder="Find a verb to practice..."
@@ -146,8 +147,8 @@
 				</div>
 			</div>
 		{:else}
-			<div class="flex flex-col items-center justify-center">
-				<div class="mt-10 flex h-190 w-[80%] flex-col items-center rounded-2xl bg-amber-50 p-3">
+			<div class="mt-5 flex w-110 flex-col items-center justify-center rounded-2xl bg-neutral-300">
+				<div class="flex h-130 w-full flex-col items-center rounded-2xl bg-amber-50 p-3">
 					<h1 class="flex-1">
 						{#if selectedVerb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(selectedVerb.infinitive[0])}
 							<span class="text-pink-600">S'</span>
@@ -157,7 +158,7 @@
 						{selectedVerb.infinitive}
 					</h1>
 					<div class="mb-5 flex w-full flex-6 flex-col items-center">
-						<select bind:value={selectedDefinition} class="w-[50%]">
+						<select bind:value={selectedDefinition} class="w-[80%] rounded-2xl">
 							{#each selectedVerb.definitions as d}
 								<option value={d.definition}>
 									{d.definition}
@@ -177,6 +178,7 @@
 											value="je"
 											checked
 											class="mr-2"
+											disabled={imperative}
 										/>je</label
 									>
 
@@ -197,6 +199,7 @@
 											id="on"
 											value="on"
 											class="mr-2"
+											disabled={imperative}
 										/>on</label
 									>
 
@@ -217,6 +220,7 @@
 											id="il"
 											value="il"
 											class="mr-2"
+											disabled={imperative}
 										/>il</label
 									>
 								</div>
@@ -228,6 +232,7 @@
 											id="elle"
 											value="elle"
 											class="mr-2"
+											disabled={imperative}
 										/>elle</label
 									>
 									<label for="ils"
@@ -237,6 +242,7 @@
 											id="ils"
 											value="ils"
 											class="mr-2"
+											disabled={imperative}
 										/>ils</label
 									>
 
@@ -247,6 +253,7 @@
 											id="elles"
 											value="elles"
 											class="mr-2"
+											disabled={imperative}
 										/>elles</label
 									>
 
@@ -373,27 +380,37 @@
 											type="radio"
 											id="imperatif"
 											value="imperatif"
-										/>imperatif</label
+											onclick={() => {
+												if (
+													selectedSubject !== 'tu' ||
+													selectedSubject !== 'nous' ||
+													selectedSubject !== 'vous'
+												) {
+													selectedSubject = 'vous';
+													console.log('forced subject chagne');
+												}
+											}}
+										/>imperatif (tu/vous/nous)</label
 									>
 								</div>
 							</form>
 						</div>
 					</div>
-					{#if generatedText !== ''}
-						<div
-							class="mt-3 h-full rounded-2xl border border-gray-400 bg-white p-3"
-							contenteditable="false"
-							bind:innerText={generatedText}
-						></div>
-					{/if}
-					{#if !generating}
-						<button class="mt-4 mb-3 text-[19px]" onclick={generateSentence}
-							>Generate Example</button
-						>
-					{:else}
-						<div class="ellipsis-anim mt-4 mb-3 w-[50%] self-center text-[19px]">Generating</div>
-					{/if}
 				</div>
+				{#if generatedText !== ''}
+					<div
+						class="m-4 h-full rounded-2xl border border-gray-400 bg-white p-3"
+						contenteditable="false"
+						bind:innerText={generatedText}
+					></div>
+				{/if}
+				{#if !generating}
+					<button class="blue_button m-4 rounded-3xl! p-3! text-[19px]" onclick={generateSentence}
+						>Generate Example</button
+					>
+				{:else}
+					<div class="ellipsis-anim mt-4 mb-3 ml-6 w-[50%] text-[17px]">Generating</div>
+				{/if}
 			</div>
 		{/if}
 	</div>
