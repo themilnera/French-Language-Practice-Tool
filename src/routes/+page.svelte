@@ -100,7 +100,7 @@
 				>
 				<button
 					onclick={() => {
-						menu = 'study';
+						goto('/test');
 					}}>Test Mode</button
 				>
 			{:else if menu == 'study' || menu == 'test'}
