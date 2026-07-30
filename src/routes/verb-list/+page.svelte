@@ -54,7 +54,7 @@
 	</div>
 	<div class="flex w-full flex-1 justify-center bg-amber-50 pt-10 md:pt-50">
 		<div class="w-[70%] rounded-2xl pb-5">
-			<form method="POST" class="flex flex-col gap-3">
+			<form use:enhance method="POST" class="flex flex-col gap-3">
 				<h1 class="self-center">Verb:</h1>
 				<label class="flex items-center justify-between text-lg"
 					>Infinitive:

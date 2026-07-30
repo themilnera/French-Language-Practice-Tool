@@ -147,7 +147,9 @@
 				</div>
 			</div>
 		{:else}
-			<div class="mt-5 flex w-110 flex-col items-center justify-center rounded-2xl bg-neutral-300">
+			<div
+				class="mt-5 flex w-110 flex-col items-center justify-center rounded-2xl bg-neutral-300 xl:w-140"
+			>
 				<div class="flex h-130 w-full flex-col items-center rounded-2xl bg-amber-50 p-3">
 					<h1 class="flex-1">
 						{#if selectedVerb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(selectedVerb.infinitive[0])}
@@ -270,7 +272,7 @@
 							</form>
 						</div>
 						<div class="mt-7 flex w-full flex-1 flex-col items-center">
-							<form class="flex w-[90%] justify-between text-[15px]">
+							<form class="flex w-full justify-between pr-5 pl-10 text-[15px] xl:pr-8 xl:pl-20">
 								<div class="flex flex-col flex-wrap gap-2">
 									<label for="présent"
 										><input
