@@ -58,7 +58,7 @@ export async function PUT({ request }) {
 
 export async function GET({ request }) {
 	try {
-		const result = await pool.query(`SELECT * FROM verb`);
+		const result = await pool.query(`SELECT * FROM verb ORDER BY id`);
 		return json(result.rows);
 	} catch (error) {
 		console.error('Database error: ', error);

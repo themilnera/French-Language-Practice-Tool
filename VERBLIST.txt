@@ -113,35 +113,53 @@ S'apercevoir (idiomatic):
 Realize, more mental, stronger on this definition with the pronoun.
 
 Apparaître
+
 Appartenir
+
 Appeler
+
 S'appeler (idiomatic)
 S'appeler (reciprocal)
+
 Apporter
+
 Apprendre
+
 Apprêter
 S'apprêter (reflexive)
+
 Approcher
 S'approcher de (reflexive)
+
 Approprier
 S'approprier (idiomatic)
+
 Approuver
 
 Appuyer: Press (sv. un bouton). Lean against. Support, endorse. Emphasize, stress qqc. Accentuate pronunciation of qqc (syllabe, mot). Head in a direction (la voiture appuie vers la droite). Give, hand, throw something (casual). Hold a musical note.
 
 
 Armer
+
 Arracher
+
 Arranger
+
 S'arroger
+
 Arrêter
 S'arrêter (reflexive)
+
 Arriver
 Asseoir
 S'asseoir (reflexive)
+
 Assister
+
 Assurer
+
 Attaquer
+
 Atteindre
 Attendre
 S'attendre (à) (idiomatic)
@@ -167,7 +185,7 @@ Bavarder
 Blaguer
 Blâmer
 Blanchir
-Blesser
+**Blesser
 Boire
 Bouger
 Bouillir
@@ -295,6 +313,7 @@ Dire
 Se dire (reciprocal)
 Diriger
 Se diriger vers (idiomatic)
+Disculper
 Discuter
 Disparaître
 Disperser

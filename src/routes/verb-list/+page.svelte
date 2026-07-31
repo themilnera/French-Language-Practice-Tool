@@ -58,12 +58,7 @@
 				<h1 class="self-center">Verb:</h1>
 				<label class="flex items-center justify-between text-lg"
 					>Infinitive:
-					<input
-						name="infinitive"
-						class="ml-4 h-8 w-full"
-						readonly={!selected ? false : true}
-						bind:value={infinitive}
-					/>
+					<input name="infinitive" class="ml-4 h-8 w-full" bind:value={infinitive} />
 				</label>
 				<label class="flex flex-col items-center justify-between text-lg"
 					>Definition:
