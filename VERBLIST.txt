@@ -185,7 +185,7 @@ Bavarder
 Blaguer
 Blâmer
 Blanchir
-**Blesser
+Blesser
 Boire
 Bouger
 Bouillir
@@ -272,6 +272,7 @@ Décrire
 Se dédire
 Défaire
 Défendre
+Defiler
 Dégager
 Déjeuner
 Demander
@@ -602,6 +603,7 @@ Se raser (reflexive)
 Rassembler
 Se rassembler (reflexive)
 Rassurer
+Rater
 Recevoir
 Reconduire
 Reconnaître

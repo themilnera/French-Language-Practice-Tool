@@ -1,18 +1,42 @@
 <script>
-	import { onMount } from 'svelte';
-
+	import { onMount, tick } from 'svelte';
+	import { enhance } from '$app/forms';
 	let { data } = $props();
 	let verbs = $derived(data?.verbs?.sort((a, b) => a.infinitive.localeCompare(b.infinitive)));
+
 	let infinitive = $state('');
 	let definition = $state('');
 	let selected = $state(null);
 	let subtype = $state('');
 	let pronomial = $state(false);
+
+	/**@type {HTMLDivElement} */
+	let verbDiv = $state(null);
+
+	function resetFields() {
+		infinitive = '';
+		definition = '';
+		selected = null;
+		subtype = '';
+		pronomial = false;
+	}
+
+	function handleSubmit() {
+		const scrollTop = verbDiv?.scrollTop;
+		console.log(scrollTop);
+		return async ({ update }) => {
+			await update({ reset: false });
+			await tick();
+			if (verbDiv) verbDiv.scrollTop = scrollTop;
+			resetFields();
+		};
+	}
 </script>
 
 <div class="flex h-screen flex-col justify-center bg-amber-50 md:flex-row-reverse">
 	<div
 		class="flex min-h-0 w-full flex-1 flex-col items-start overflow-auto border-b-2 bg-red-50 p-5 md:border-l-2"
+		bind:this={verbDiv}
 	>
 		{#if verbs}
 			{#each verbs as verb, index}
@@ -28,12 +52,8 @@
 					<div class="ml-auto w-full">
 						<button
 							onclick={() => {
-								if (selected === verb) {
-									selected = null;
-									infinitive = '';
-									subtype = '';
-									pronomial = false;
-									definition = '';
+								if (selected && selected.definition === verb.definition) {
+									resetFields();
 								} else {
 									selected = verb;
 									infinitive = verb.infinitive;
@@ -54,7 +74,7 @@
 	</div>
 	<div class="flex w-full flex-1 justify-center bg-amber-50 pt-10 md:pt-50">
 		<div class="w-[70%] rounded-2xl pb-5">
-			<form use:enhance method="POST" class="flex flex-col gap-3">
+			<form use:enhance={handleSubmit} method="POST" class="flex flex-col gap-3">
 				<h1 class="self-center">Verb:</h1>
 				<label class="flex items-center justify-between text-lg"
 					>Infinitive:
@@ -96,11 +116,16 @@
 				{#if !selected}
 					<button class="mt-5 w-[50%] self-center" type="submit" formaction="?/add">Submit</button>
 				{:else}
-					<button
-						class="mt-5 w-[50%] self-center bg-cyan-700! hover:bg-cyan-800!"
-						type="submit"
-						formaction="?/update">Update</button
-					>
+					<div class="flex gap-5">
+						<button
+							class="mt-5 w-[50%] self-center bg-cyan-700! hover:bg-cyan-800!"
+							type="submit"
+							formaction="?/update">Update</button
+						>
+						<button class="red_button mt-5 w-[50%] self-center" type="submit" formaction="?/delete"
+							>Delete</button
+						>
+					</div>
 				{/if}
 			</form>
 		</div>

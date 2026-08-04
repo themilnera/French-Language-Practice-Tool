@@ -38,5 +38,18 @@ export const actions = {
 				'Content-Type': 'application/json'
 			}
 		});
+	},
+	delete: async ({ request, fetch }) => {
+		const data = await request.formData();
+		const id = data.get('id');
+		await fetch(`/api/verb`, {
+			method: 'DELETE',
+			body: JSON.stringify({
+				id: id
+			}),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
 	}
 };

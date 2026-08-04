@@ -411,7 +411,7 @@
 						>Generate Example</button
 					>
 				{:else}
-					<div class="ellipsis-anim mt-4 mb-3 ml-6 w-[50%] text-[17px]">Generating</div>
+					<div class="ellipsis-anim mt-4 mb-3 ml-6 text-[17px]"></div>
 				{/if}
 			</div>
 		{/if}

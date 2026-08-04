@@ -56,6 +56,24 @@ export async function PUT({ request }) {
 	}
 }
 
+export async function DELETE({ request }) {
+	const body = await request.json();
+	const { id } = body;
+	try {
+		const result = await pool.query(
+			`
+            DELETE FROM verb 
+			WHERE id = $1 
+			RETURNING *
+        `,
+			[id]
+		);
+		return json({ success: 'Successfully deleted ID: ' + id }, { status: 201 });
+	} catch (error) {
+		console.error('Failed to delete from database. ID:' + id);
+	}
+}
+
 export async function GET({ request }) {
 	try {
 		const result = await pool.query(`SELECT * FROM verb ORDER BY id`);
