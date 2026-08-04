@@ -7,6 +7,7 @@
 	let infinitive = $state('');
 	let definition = $state('');
 	let selected = $state(null);
+
 	let subtype = $state('');
 	let pronomial = $state(false);
 
@@ -19,6 +20,13 @@
 		selected = null;
 		subtype = '';
 		pronomial = false;
+	}
+
+	function getSelectedClasses(verb) {
+		if (selected?.definition === verb.definition) {
+			return 'flex! w-full justify-between!  text-[3vw] text-black! md:text-lg bg-red-400! hover:bg-red-500!';
+		} else
+			return 'flex! w-full justify-between!  text-[3vw] text-black! md:text-lg bg-red-200! hover:bg-red-300!';
 	}
 
 	function handleSubmit() {
@@ -52,7 +60,7 @@
 					<div class="ml-auto w-full">
 						<button
 							onclick={() => {
-								if (selected && selected.definition === verb.definition) {
+								if (selected?.definition === verb.definition) {
 									resetFields();
 								} else {
 									selected = verb;
@@ -62,7 +70,7 @@
 									definition = verb.definition;
 								}
 							}}
-							class="flex! w-full justify-between! bg-red-200! text-[3vw] text-black! hover:bg-red-300! md:text-lg"
+							class={getSelectedClasses(verb)}
 						>
 							<p class="text-left">{verb.definition}</p>
 							<p class="text-violet-700">{verb.subtype ? `${verb.subtype}` : ''}</p>
