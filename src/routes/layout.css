@@ -125,6 +125,29 @@ option {
 	transform: rotate(90deg);
 	box-sizing: border-box;
 }
+.small_loader {
+	--color-1: #000000;
+	--size: 2px;
+
+	width: calc(20 * var(--size));
+	height: calc(2 * var(--size));
+	border-radius: calc(1 * var(--size));
+	display: block;
+	margin: calc(15 * var(--size)) auto;
+	position: relative;
+	background: var(--color-1);
+	box-sizing: border-box;
+	animation: spin 1.2s linear infinite;
+}
+.small_loader::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: var(--color-1);
+	border-radius: inherit;
+	transform: rotate(90deg);
+	box-sizing: border-box;
+}
 
 @keyframes spin {
 	to {

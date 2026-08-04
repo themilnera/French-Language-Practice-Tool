@@ -7,6 +7,7 @@
 	let infinitive = $state('');
 	let definition = $state('');
 	let selected = $state(null);
+	let submitting = $state(false);
 
 	let subtype = $state('');
 	let pronomial = $state(false);
@@ -14,8 +15,10 @@
 	/**@type {HTMLDivElement} */
 	let verbDiv = $state(null);
 
+	let preserve = $state(false);
+
 	function resetFields() {
-		infinitive = '';
+		if (!preserve) infinitive = '';
 		definition = '';
 		selected = null;
 		subtype = '';
@@ -23,13 +26,19 @@
 	}
 
 	function getSelectedClasses(verb) {
-		if (selected?.definition === verb.definition) {
-			return 'flex! w-full justify-between!  text-[3vw] text-black! md:text-lg bg-red-400! hover:bg-red-500!';
+		if (selected?.definition === verb?.definition) {
+			return 'flex! w-full justify-between!  text-[3vw] text-white! md:text-lg bg-red-700! hover:bg-red-800! text-shadow-gray-400';
 		} else
 			return 'flex! w-full justify-between!  text-[3vw] text-black! md:text-lg bg-red-200! hover:bg-red-300!';
 	}
+	function getSubtypeClasses(verb) {
+		if (selected?.definition === verb?.definition) {
+			return 'text-violet-300 font-extrabold text-shadow-sm text-shadow-gray-400';
+		} else return 'text-violet-700';
+	}
 
 	function handleSubmit() {
+		submitting = true;
 		const scrollTop = verbDiv?.scrollTop;
 		console.log(scrollTop);
 		return async ({ update }) => {
@@ -37,6 +46,7 @@
 			await tick();
 			if (verbDiv) verbDiv.scrollTop = scrollTop;
 			resetFields();
+			submitting = false;
 		};
 	}
 </script>
@@ -51,9 +61,9 @@
 				<div class="flex self-center">
 					{#if index == 0 || verb.infinitive !== verbs[index - 1].infinitive}
 						{#if verb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(verb.infinitive[0])}
-							<p class="text-cyan-400">S'</p>
+							<p class="mt-2 text-cyan-400">S'</p>
 						{/if}
-						<p class="font-bold text-blue-800">{verb.infinitive}</p>
+						<p class="mt-2 font-bold text-blue-800">{verb.infinitive}</p>
 					{/if}
 				</div>
 				<div class="flex w-full bg-red-200 pt-1 pr-3 pb-1 pl-3">
@@ -73,7 +83,9 @@
 							class={getSelectedClasses(verb)}
 						>
 							<p class="text-left">{verb.definition}</p>
-							<p class="text-violet-700">{verb.subtype ? `${verb.subtype}` : ''}</p>
+							<p class={getSubtypeClasses(verb)}>
+								{verb.subtype ? `${verb.subtype}` : ''}
+							</p>
 						</button>
 					</div>
 				</div>
@@ -87,6 +99,7 @@
 				<label class="flex items-center justify-between text-lg"
 					>Infinitive:
 					<input name="infinitive" class="ml-4 h-8 w-full" bind:value={infinitive} />
+					<input class="ml-2 rounded-sm!" type="checkbox" bind:checked={preserve} />
 				</label>
 				<label class="flex flex-col items-center justify-between text-lg"
 					>Definition:
@@ -122,17 +135,34 @@
 					<input name="id" class="ml-2 h-8 w-full" readonly value={selected?.id} />
 				</label>
 				{#if !selected}
-					<button class="mt-5 w-[50%] self-center" type="submit" formaction="?/add">Submit</button>
+					{#if !submitting}
+						<button
+							class="mt-5 w-[50%] self-center"
+							type="submit"
+							formaction="?/add"
+							disabled={submitting}>Submit</button
+						>
+					{:else}
+						<div class="small_loader"></div>
+					{/if}
 				{:else}
 					<div class="flex gap-5">
-						<button
-							class="mt-5 w-[50%] self-center bg-cyan-700! hover:bg-cyan-800!"
-							type="submit"
-							formaction="?/update">Update</button
-						>
-						<button class="red_button mt-5 w-[50%] self-center" type="submit" formaction="?/delete"
-							>Delete</button
-						>
+						{#if !submitting}
+							<button
+								disabled={submitting}
+								class="mt-5 w-[50%] self-center bg-cyan-700! hover:bg-cyan-800!"
+								type="submit"
+								formaction="?/update">Update</button
+							>
+							<button
+								class="red_button mt-5 w-[50%] self-center"
+								type="submit"
+								formaction="?/delete"
+								disabled={submitting}>Delete</button
+							>
+						{:else}
+							<div class="small_loader"></div>
+						{/if}
 					</div>
 				{/if}
 			</form>
