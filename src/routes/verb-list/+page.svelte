@@ -15,6 +15,9 @@
 	/**@type {HTMLDivElement} */
 	let verbDiv = $state(null);
 
+	/**@type {HTMLInputElement}*/
+	let defInput = $state(null);
+
 	let preserve = $state(false);
 
 	function resetFields() {
@@ -47,6 +50,7 @@
 			if (verbDiv) verbDiv.scrollTop = scrollTop;
 			resetFields();
 			submitting = false;
+			defInput.focus();
 		};
 	}
 </script>
@@ -60,7 +64,7 @@
 			{#each verbs as verb, index}
 				<div class="flex self-center">
 					{#if index == 0 || verb.infinitive !== verbs[index - 1].infinitive}
-						{#if verb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(verb.infinitive[0])}
+						{#if verb.pronomial && ['a', 'e', 'é', 'i', 'o', 'u'].includes(verb.infinitive.toLowerCase()[0])}
 							<p class="mt-2 text-cyan-400">S'</p>
 						{/if}
 						<p class="mt-2 font-bold text-blue-800">{verb.infinitive}</p>
@@ -103,7 +107,12 @@
 				</label>
 				<label class="flex flex-col items-center justify-between text-lg"
 					>Definition:
-					<input name="definition" class="ml-2 h-8 w-full" bind:value={definition} />
+					<input
+						name="definition"
+						class="ml-2 h-8 w-full"
+						bind:value={definition}
+						bind:this={defInput}
+					/>
 				</label>
 				<div class="flex items-center justify-between gap-8">
 					<div class="flex items-center">

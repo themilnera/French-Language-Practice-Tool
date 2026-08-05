@@ -269,7 +269,6 @@ Décider
 Décourager
 Découvrir
 Décrire
-Se dédire
 Défaire
 Défendre
 Defiler
@@ -387,6 +386,7 @@ S'envoler
 Épeler
 Épouser
 S'éprendre
+Éprouver
 Espérer
 Essayer
 Essuyer
@@ -479,6 +479,7 @@ Jouir
 Juger
 Jurer
 Klaxonner
+lâcher
 Laisser
 Lancer
 Laver
@@ -706,6 +707,7 @@ Sortir
 Souffler
 Souffrir
 Souhaiter
+Soulever
 Se soûler (reflexive)
 Souligner
 Sourire

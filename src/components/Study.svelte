@@ -92,6 +92,7 @@
 			selectedTense = 'présent';
 		}
 	});
+	//Search appears to be broken for some words, find out why
 </script>
 
 <div class="flex flex-col items-center">
@@ -121,7 +122,7 @@
 								}}
 							>
 								<span class="mt-4 font-bold text-blue-800">
-									{#if verb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(verb.infinitive[0])}
+									{#if verb.pronomial && ['a', 'e', 'é', 'i', 'o', 'u'].includes(verb.infinitive[0].toLowerCase())}
 										<span class="text-pink-600">S'</span>
 									{:else if verb.pronomial}
 										<span class="text-pink-600">Se&nbsp;</span>
