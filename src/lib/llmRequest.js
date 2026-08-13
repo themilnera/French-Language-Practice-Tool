@@ -6,6 +6,7 @@ export default async function llmRequest(url, model, system, prompt, temperature
 			body: JSON.stringify({
 				model: model,
 				prompt: prompt,
+				system: system,
 				stream: false,
 				options: { temperature: temperature }
 			})

@@ -10,20 +10,19 @@
 	let loaded = $state(false);
 	let testing = $state(false);
 
-	//test bools
-	let api_confirmed = $state(false);
-	let api_failed = $state(false);
-
 	//bound inputs
 	let input_url = $state('');
 	let input_model = $state('');
 
+	//mode options
+	let menu = $state('mode');
+
+	//api test bools
+	let api_confirmed = $state(false);
+	let api_failed = $state(false);
 	//confirmed params
 	let api_url = $state('');
 	let api_model = $state('');
-
-	//mode options
-	let menu = $state('mode');
 
 	let local_api = $state('');
 	async function loadAll() {
