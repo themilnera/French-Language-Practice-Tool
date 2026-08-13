@@ -5,20 +5,30 @@
 body {
 	-webkit-font-smoothing: auto;
 	-moz-osx-font-smoothing: auto;
-	background-color: rgb(159, 160, 145);
+
 	font-family: 'Kameron', serif;
 	font-optical-sizing: auto;
 	font-weight: 600;
 	font-style: normal;
 	font-size: larger;
 	text-rendering: optimizeLegibility;
+	background-color: rgb(159, 160, 145);
+}
+.color-mid-olive {
+	background-color: rgb(159, 160, 145);
+}
+.color-des-green {
+	background-color: rgb(192, 202, 190);
+}
+.color-des-green-2 {
+	background-color: rgb(220, 224, 220);
 }
 
 .animate__animated.animate__fadeIn {
 	--animation-delay: 1s;
 }
 
-button {
+.def_button {
 	min-width: 150px;
 	color: rgb(255, 255, 255);
 	padding: 8px;
@@ -26,7 +36,7 @@ button {
 	border-color: rgb(2, 60, 56);
 	background-color: rgb(0, 150, 100);
 }
-button:hover {
+.def_button:hover {
 	transform: translateY(-1px);
 	border-color: rgb(2, 52, 48);
 	background-color: rgb(42, 97, 80);
@@ -59,20 +69,6 @@ button:hover {
 	transform: translateY(-1px);
 	border-color: rgb(2, 24, 52);
 	background-color: rgb(42, 75, 97);
-	cursor: pointer;
-}
-
-.def_button {
-	background-color: rgb(134, 179, 165);
-	color: rgb(255, 255, 255);
-	padding: 8px;
-	border-radius: 10px;
-	border-color: rgb(2, 60, 24);
-}
-.def_button:hover {
-	background-color: rgb(123, 161, 151);
-	transform: translateY(-1px);
-	border-color: rgb(2, 52, 23);
 	cursor: pointer;
 }
 

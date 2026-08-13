@@ -26,6 +26,7 @@
 		"vite": "^8.0.16"
 	},
 	"dependencies": {
+		"@iconify-svelte/material-symbols": "^1.0.48",
 		"animate.css": "^4.1.1",
 		"better-sqlite3": "^13.0.1",
 		"pg": "^8.22.0"
