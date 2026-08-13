@@ -1,0 +1,13 @@
+
+Settings page (API settings)
+
+Making a get for the full verb list every time is excessive,
+we could store the list somewhere to save the trouble 
+
+Better visual feedback for the imperative options (tu,vous,nous)
+
+Dynamic styles? Styling overall could use work still
+
+Further down the road:
+Nouns
+Translate mode

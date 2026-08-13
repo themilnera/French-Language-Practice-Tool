@@ -10,7 +10,7 @@
 	let api_model = $state('');
 	let generatedText = $state('');
 	let generating = $state(false);
-
+	let generateError = $state(false);
 	//url slug
 	let slug = $derived(decodeURIComponent(page.url.pathname.split('/study/')[1]) ?? null);
 	let selectedVerb = $derived(page.state.verb ?? null);
@@ -32,16 +32,23 @@
 	let imperative = $derived(selectedTense === 'imperatif' ? true : false);
 
 	async function generateSentence() {
+		generateError = false;
 		generating = true;
 		console.log('generating');
-		let response = await llmRequest(
-			`${api_url}`,
-			api_model,
-			"Tu es un générateur de phrases d'exemple en français pour un apprenant de la langue française. Tu dois répondre UNIQUEMENT avec la phrase générée, rien d'autre. La phrase doit impérativement correspondre à l'usage, au sujet et au temps demandés.",
-			`Génère une phrase d'exemple avec le verbe : ${selectedVerb.pronomial ? "se/s' " : ''}${selectedVerb.infinitive}, correspondant à cet usage : ${selectedDefinition}, en utilisant le sujet : ${selectedSubject} et le temps : ${selectedTense}.\n`,
-			0.3
-		);
-		generatedText = response;
+		try {
+			let response = await llmRequest(
+				`${api_url}`,
+				api_model,
+				"Tu es un générateur de phrases d'exemple en français pour un apprenant de la langue française. Tu dois répondre UNIQUEMENT avec la phrase générée, rien d'autre. La phrase doit impérativement correspondre à l'usage, au sujet et au temps demandés.",
+				`Génère une phrase d'exemple avec le verbe : ${selectedVerb.pronomial ? "se/s' " : ''}${selectedVerb.infinitive}, correspondant à cet usage : ${selectedDefinition}, en utilisant le sujet : ${selectedSubject} et le temps : ${selectedTense}.\n`,
+				0.3
+			);
+
+			generatedText = response;
+		} catch (error) {
+			generateError = true;
+			generatedText = 'Failed to generate, error: ' + error;
+		}
 		generating = false;
 	}
 
@@ -100,11 +107,11 @@
 				<div class="mt-5 mb-5 self-center">
 					<input placeholder="Find a verb to practice..." bind:value={filterInput} oninput={changeFilter} />
 				</div>
-				<div class="flex h-[90%] min-h-0 w-full flex-1 flex-col items-start overflow-auto bg-red-50 p-5">
+				<div class="flex h-[90%] min-h-0 w-full flex-1 flex-col items-start overflow-auto bg-gray-50 p-5">
 					{#if fullList.length !== 0}
 						{#each list as verb, index}
 							<button
-								class="mt-2 flex w-full flex-col rounded-2xl bg-red-50! p-2 text-start text-black! hover:cursor-pointer hover:bg-gray-200!"
+								class="color-des-2 mt-2 flex w-full flex-col rounded-2xl border-2 border-olive-200 p-2 text-start text-black! hover:cursor-pointer hover:bg-gray-200!"
 								onclick={() => {
 									pushState(`/study/${verb.infinitive}`, { verb });
 									selectedVerb = verb;
@@ -121,7 +128,7 @@
 									{/if}{verb.infinitive}
 								</span>
 
-								<div class="color-des-green-2 flex w-full rounded-xl p-3">
+								<div class="flex w-full rounded-xl border-2 border-olive-200 bg-amber-50 p-3">
 									<div class="ml-auto w-full">
 										<div class="xs:text-[3vw] flex flex-col justify-between text-[17px]">
 											{#each verb.definitions as d}
@@ -139,7 +146,7 @@
 				</div>
 			</div>
 		{:else}
-			<div class="flex w-110 flex-col items-center justify-center rounded-2xl bg-neutral-300 xl:w-140">
+			<div class="mt-10 flex w-110 flex-col items-center justify-center rounded-2xl bg-neutral-300 xl:w-140">
 				<div class="flex h-130 w-full flex-col items-center rounded-2xl bg-amber-50 p-3">
 					<h1 class="flex-1">
 						{#if selectedVerb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(selectedVerb.infinitive[0])}
@@ -224,7 +231,11 @@
 					</div>
 				</div>
 				{#if generatedText !== ''}
-					<div class="m-4 h-full rounded-2xl border border-gray-400 bg-white p-3" contenteditable="false" bind:innerText={generatedText}></div>
+					<div
+						class={generateError === true ? 'text-red-800' : 'text-black' + ' m-4 h-full rounded-2xl border border-gray-400 bg-white p-3'}
+						contenteditable="false"
+						bind:innerText={generatedText}
+					></div>
 				{/if}
 				{#if !generating}
 					<button class="blue_button m-4 rounded-3xl! p-3! text-[19px]" onclick={generateSentence}>Generate Example</button>

@@ -5,4 +5,6 @@
 </script>
 
 <Nav />
-<Test {data} />
+{#if data}
+	<Test {data} />
+{/if}

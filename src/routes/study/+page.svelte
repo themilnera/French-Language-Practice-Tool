@@ -13,4 +13,6 @@
 </script>
 
 <Nav />
-<Study {data} />
+{#if data}
+	<Study {data} />
+{/if}

@@ -1,8 +1,10 @@
 <script>
 	import Study from '../../../components/Study.svelte';
+	import Nav from '../../../components/Nav.svelte';
 	let { data } = $props();
 </script>
 
-<div>
+<Nav />
+{#if data}
 	<Study {data} />
-</div>
+{/if}

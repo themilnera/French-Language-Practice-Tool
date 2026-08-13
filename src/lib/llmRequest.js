@@ -12,9 +12,8 @@ export default async function llmRequest(url, model, system, prompt, temperature
 			})
 		});
 		const data = await res.json();
-		console.log(data);
 		return data.response;
 	} catch (error) {
-		console.error('Failed to fetch from LLM: ' + error);
+		return error;
 	}
 }
