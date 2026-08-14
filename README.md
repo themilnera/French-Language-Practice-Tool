@@ -2,6 +2,8 @@
 
 I believe that LLMs are only useful as a tool inasmuch as they can be made to work with consistency. The key to doing that, in my opinion, is to have a deterministic structure. For practicing French, I could just have the LLM generate exercises from nothing, but those will be unpredictable, and it's hard to gauge whether it's giving you consistently useful and comprehensive study material, and that's the case even with something a LLM should be really good at: language.
 
+This work in progress app is subject to change drastically. I'm not happy with some of the styling at the moment, but I was working on getting the main functionality in, so that's the next priority.
+
 Therefore, what I'm building here is a simple app that uses a database of frequently used words as a practice guide. When the LLM generates a practice sentence, it'll be told exactly which word to focus on.
 
 ## Why local LLMs?
