@@ -12,6 +12,12 @@ Because here, assuming you're using one that's well versed in French, a particul
 
 The benefit of having something that can read any sentence you input tell you where you made grammatical errors is obvious. An LLM, even a small one, can do that pretty consistently. Language is all they are really trained in. It's infinitely more difficult to code something that can do that with pattern matching and conditional statements.
 
-# Deployment
+## Deployment
 
 Right this moment the deployed version of the site doesn't work because CORS blocks localhost requests. It's usable if you want to clone the repo, npm install and npm run dev, but I'm looking at possibly setting up a small hosted LLM somewhere. The other option is to bundle it with electron or something and make it a local only app, but I'm working out what I want to do.
+
+<img width="1250" height="889" alt="image 1" src="https://github.com/user-attachments/assets/a35259f4-388d-4c98-96f7-68ceb94e3539" />
+
+<img width="981" height="843" alt="image 2" src="https://github.com/user-attachments/assets/809c06c5-b0c6-4bf8-ada8-ab5f8b783baa" />
+
+<img width="935" height="891" alt="image 4" src="https://github.com/user-attachments/assets/29437a05-ef60-4f76-9195-bd14fe54197c" />
