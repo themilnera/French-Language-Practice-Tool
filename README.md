@@ -6,11 +6,7 @@ This work in progress app is subject to change drastically. I'm not happy with s
 
 Therefore, what I'm building here is a simple app that uses a database of frequently used words as a practice guide. When the LLM generates a practice sentence, it'll be told exactly which word to focus on.
 
-## Why local LLMs?
-
-Because here, assuming you're using one that's well versed in French, a particularly large model would be overkill. Something smaller will do well enough if you're giving it a very small specific task like: "Generate a practice sentence with this verb."
-
-## Why LLMs at all?
+## Why LLMs?
 
 The benefit of having something that can read any sentence you input tell you where you made grammatical errors is obvious. An LLM, even a small one, can do that pretty consistently. Language is all they are really trained in. It's infinitely more difficult to code something that can do that with pattern matching and conditional statements.
 

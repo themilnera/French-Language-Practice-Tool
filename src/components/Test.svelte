@@ -1,6 +1,5 @@
 <script>
 	import { deriveList } from '$lib/functions';
-	import llmRequest from '$lib/llmRequest';
 	import { localStore } from '$lib/localStore.svelte';
 	import { onMount } from 'svelte';
 	let api_url = $state('');
@@ -26,14 +25,20 @@
 
 	async function gradeChallenge() {
 		checking = true;
-		let response = await llmRequest(
-			`${api_url}`,
-			api_model,
-			`RESPOND IN PlAINTEXT ONLY, NO FORMATTING, ASTERISKS, ETC. A student is learning french. They've been told to write a sentence using a verb, in a specific tense, with a specific subject. Your job is to check whether their sentence is correct, provide the corrected version if not, and an explanation if necessary.`,
-			`Verb:${currentVerb}, Subject ${currentSubject}, Tense ${currentTense}, The student's sentence: ${inputSentence}.\nMy response: `,
-			0.4
-		);
-		responseField = response;
+
+		let response = await fetch('/api/llm', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				system: `RESPOND IN PlAINTEXT ONLY, NO FORMATTING, ASTERISKS, ETC. A student is learning french. They've been told to write a sentence using a verb, in a specific tense, with a specific subject. Your job is to check whether their sentence is correct, provide the corrected version if not, and an explanation if necessary.`,
+				prompt: `Verb:${currentVerb.infinitive}, Subject ${currentSubject}, Tense ${currentTense}, The student's sentence: ${inputSentence}.\nMy response: `,
+				temperature: 0.4
+			})
+		});
+		const data = await response.json();
+		responseField = data.result;
 		checking = false;
 	}
 	function getTest() {

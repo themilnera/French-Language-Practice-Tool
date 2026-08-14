@@ -2,9 +2,9 @@
 	import { pushState } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
-	import llmRequest from '$lib/llmRequest';
 	import { localStore } from '$lib/localStore.svelte.js';
 	import { deriveList } from '$lib/functions';
+	import { json } from '@sveltejs/kit';
 	//for the local llm
 	let api_url = $state('');
 	let api_model = $state('');
@@ -36,15 +36,20 @@
 		generating = true;
 		console.log('generating');
 		try {
-			let response = await llmRequest(
-				`${api_url}`,
-				api_model,
-				"Tu es un générateur de phrases d'exemple en français pour un apprenant de la langue française. Tu dois répondre UNIQUEMENT avec la phrase générée, rien d'autre. La phrase doit impérativement correspondre à l'usage, au sujet et au temps demandés.",
-				`Génère une phrase d'exemple avec le verbe : ${selectedVerb.pronomial ? "se/s' " : ''}${selectedVerb.infinitive}, correspondant à cet usage : ${selectedDefinition}, en utilisant le sujet : ${selectedSubject} et le temps : ${selectedTense}.\n`,
-				0.3
-			);
-
-			generatedText = response;
+			let response = await fetch('/api/llm', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					system:
+						"Tu es un générateur de phrases d'exemple en français pour un apprenant de la langue française. Tu dois répondre UNIQUEMENT avec la phrase générée, rien d'autre. La phrase doit impérativement correspondre à l'usage, au sujet et au temps demandés.",
+					prompt: `Génère une phrase d'exemple avec le verbe : ${selectedVerb.pronomial ? "se/s' " : ''}${selectedVerb.infinitive}, correspondant à cet usage : ${selectedDefinition}, en utilisant le sujet : ${selectedSubject} et le temps : ${selectedTense}.\n`,
+					temperature: 0.3
+				})
+			});
+			const data = await response.json();
+			generatedText = data.result;
 		} catch (error) {
 			generateError = true;
 			generatedText = 'Failed to generate, error: ' + error;
