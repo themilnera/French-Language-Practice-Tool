@@ -31,8 +31,7 @@
 	function getSelectedClasses(verb) {
 		if (selected?.definition === verb?.definition) {
 			return 'flex! w-full justify-between!  text-[3vw] text-white! md:text-lg bg-red-700! hover:bg-red-800! text-shadow-gray-400';
-		} else
-			return 'flex! w-full justify-between!  text-[3vw] text-black! md:text-lg bg-red-200! hover:bg-red-300!';
+		} else return 'flex! w-full justify-between!  text-[3vw] text-black! md:text-lg bg-red-200! hover:bg-red-300!';
 	}
 	function getSubtypeClasses(verb) {
 		if (selected?.definition === verb?.definition) {
@@ -55,6 +54,7 @@
 	}
 </script>
 
+<!-- 
 <div class="flex h-screen flex-col justify-center bg-amber-50 md:flex-row-reverse">
 	<div
 		class="flex min-h-0 w-full flex-1 flex-col items-start overflow-auto border-b-2 bg-red-50 p-5 md:border-l-2"
@@ -177,4 +177,4 @@
 			</form>
 		</div>
 	</div>
-</div>
+</div> -->
