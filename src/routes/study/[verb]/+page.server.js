@@ -8,7 +8,7 @@ export const load = async ({ fetch, params }) => {
 				'Content-Type': 'application/json'
 			}
 		});
+		return response.json();
 	});
-
 	return { verbs: data };
 };
