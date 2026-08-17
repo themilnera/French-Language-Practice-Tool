@@ -71,17 +71,17 @@
 		}
 		return array;
 	}
-	async function loadAll() {
-		let local_api = await localStore('local_api', '');
-		if (local_api && local_api.value != '') {
-			let parts = local_api.value.split('AND');
-			api_url = parts[0];
-			api_model = parts[1];
-		}
-	}
-	onMount(() => {
-		loadAll();
-	});
+	// async function loadAll() {
+	// 	let local_api = await localStore('local_api', '');
+	// 	if (local_api && local_api.value != '') {
+	// 		let parts = local_api.value.split('AND');
+	// 		api_url = parts[0];
+	// 		api_model = parts[1];
+	// 	}
+	// // }
+	// onMount(() => {
+	// 	loadAll();
+	// });
 </script>
 
 <div class=" flex flex-col items-center justify-center">

@@ -81,16 +81,16 @@
 	const removeAccents = (str) => {
 		return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 	};
-	async function loadAll() {
-		let local_api = await localStore('local_api', '');
-		if (local_api && local_api.value != '') {
-			let parts = local_api.value.split('AND');
-			api_url = parts[0];
-			api_model = parts[1];
-		}
-	}
+	// async function loadAll() {
+	// 	let local_api = await localStore('local_api', '');
+	// 	if (local_api && local_api.value != '') {
+	// 		let parts = local_api.value.split('AND');
+	// 		api_url = parts[0];
+	// 		api_model = parts[1];
+	// 	}
+	// }  //I may decide to make a local version of this app in the future
 	onMount(() => {
-		loadAll();
+		// loadAll();
 		if (slug !== null && slug !== '') {
 			selectedVerb = fullList.find((v) => slug.toLowerCase() === v.infinitive.toLowerCase());
 		}
