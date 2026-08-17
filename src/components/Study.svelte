@@ -153,8 +153,8 @@
 			</div>
 		{:else}
 			<div class="mt-10 flex w-110 flex-col items-center justify-center rounded-2xl bg-neutral-300 xl:w-140">
-				<div class="flex h-130 w-full flex-col items-center rounded-2xl bg-gray-200 p-3">
-					<h1 class="flex-1">
+				<div class="flex h-100 w-full flex-col items-center rounded-2xl bg-gray-200 p-3 sm:h-130">
+					<h1 class="flex-1 text-2xl! sm:text-3xl!">
 						{#if selectedVerb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(selectedVerb.infinitive[0])}
 							<span class="text-pink-600">S'</span>
 						{:else if selectedVerb.pronomial}
@@ -165,14 +165,14 @@
 					<div class="mb-5 flex w-full flex-6 flex-col items-center">
 						<select bind:value={selectedDefinition} class="w-[80%] rounded-2xl">
 							{#each selectedVerb.definitions as d}
-								<option value={d.definition}>
+								<option value={d.definition} title={d.definition}>
 									{d.definition}
 									<span class="text-violet-700">{d.subtype ? `(${d.subtype})` : ''}</span>
 								</option>
 							{/each}
 						</select>
 						<div class="border-b border-b-mist-500 pb-2">
-							<form class="mt-3 flex flex-col items-center gap-2">
+							<form class="mt-3 flex flex-col items-center gap-2 text-sm sm:text-lg">
 								<div class="flex gap-4">
 									<label for="je"><input bind:group={selectedSubject} name="subject" type="radio" id="je" value="je" checked class="mr-2" disabled={imperative} />je</label>
 
@@ -195,7 +195,7 @@
 							</form>
 						</div>
 						<div class="mt-7 flex w-full flex-1 flex-col items-center">
-							<form class="flex w-full justify-between pr-5 pl-10 text-[15px] xl:pr-8 xl:pl-20">
+							<form class="flex w-full justify-between text-[12px] sm:pr-5 sm:pl-10 sm:text-[15px] xl:pr-8 xl:pl-20">
 								<div class="flex flex-col flex-wrap gap-2">
 									<label for="présent"><input bind:group={selectedTense} name="subject" type="radio" id="présent" value="présent" class="mr-2" checked />présent</label>
 
@@ -238,13 +238,13 @@
 				</div>
 				{#if generatedText !== ''}
 					<div
-						class={generateError === true ? 'text-red-800' : 'text-black' + ' m-4 h-full rounded-2xl border border-gray-400 bg-white p-3'}
+						class={generateError === true ? 'text-red-800' : 'text-black' + 'h-full rounded-xl border border-gray-400 bg-white p-3 text-[14px] sm:text-xl'}
 						contenteditable="false"
 						bind:innerText={generatedText}
 					></div>
 				{/if}
 				{#if !generating}
-					<button class="blue_button m-4 rounded-3xl! p-3! text-[19px]" onclick={generateSentence}>Generate Example</button>
+					<button class="blue_button mt-2 mb-2 rounded-3xl! p-3! text-[15px] sm:text-[17px]" onclick={generateSentence}>Generate Example</button>
 				{:else}
 					<div class="ellipsis-anim mt-4 mb-3 ml-6 text-[17px]"></div>
 				{/if}
