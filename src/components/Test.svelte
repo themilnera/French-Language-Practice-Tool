@@ -8,7 +8,9 @@
 	let fullList = $derived(shuffle(deriveList(data?.verbs?.sort((a, b) => a.infinitive.localeCompare(b.infinitive)))) ?? []);
 	let subjects = $state(shuffle(['je', 'tu', 'on', 'vous', 'il', 'elle', 'ils', 'elles', 'nous']));
 	let tenses = $state(shuffle(['présent', 'passé composé', 'imparfait', 'futur proche', 'futur simple', 'subjonctif', 'conditionnel', 'passé conditionnel', 'plus-que-parfait', 'futur parfait']));
+
 	let started = $state(false);
+
 	let checking = $state(false);
 	let generating = $state(false);
 	let currentVerb = $state(null);
@@ -82,36 +84,36 @@
 	});
 </script>
 
-<div class="color-mid-olive flex flex-col items-center justify-center">
+<div class=" flex flex-col items-center justify-center">
 	<div class="w-[90%] max-w-200">
-		<div class="mt-10 flex h-185 w-full flex-col items-center rounded-2xl bg-amber-50">
-			<h1 class="mt-20">Verb Tester</h1>
-			{#if started}
-				<div class="mt-10 flex h-[50%] w-[80%] flex-col items-center rounded-2xl bg-amber-50">
-					<div class="flex w-100 flex-1 flex-col rounded-2xl bg-blue-900 p-5 text-center text-white">
-						<h3>Write a sentence using...</h3>
-						<div class="flex items-center justify-between border-b border-white">
-							<span class="text-2xl text-purple-300">Verb:</span>
-							<span>{currentVerb?.infinitive}</span>
-						</div>
-						<div class="flex items-center justify-between border-b border-white">
-							<span class="text-2xl text-red-400">Subject:</span>
-							<span class="">{currentSubject}</span>
-						</div>
-						<div class="flex items-center justify-between border-b border-white">
-							<span class="text-2xl text-cyan-300">Tense:</span><span>{currentTense}</span>
-						</div>
-					</div>
+		<div class="mt-10 flex h-185 w-full flex-col items-center rounded-2xl bg-gray-700">
+			<h1 class="mt-20 text-blue-300">Verb Test</h1>
 
-					{#if responseField !== ''}
-						<div class="m-5 h-full w-full flex-1 overflow-auto rounded-2xl border bg-white p-3 text-sm" contenteditable="false" bind:innerText={responseField}></div>
-					{/if}
+			<div class="mt-10 flex h-[50%] w-[80%] flex-col items-center rounded-2xl">
+				<div class="flex w-100 flex-1 flex-col rounded-2xl bg-gray-600 p-5 text-center text-white">
+					<h3>Write a sentence using...</h3>
+					<div class="flex items-center justify-between border-b border-white">
+						<span class="text-2xl text-purple-300">Verb:</span>
+						<span>{currentVerb?.infinitive}</span>
+					</div>
+					<div class="flex items-center justify-between border-b border-white">
+						<span class="text-2xl text-red-400">Subject:</span>
+						<span class="">{currentSubject}</span>
+					</div>
+					<div class="flex items-center justify-between border-b border-white">
+						<span class="text-2xl text-cyan-300">Tense:</span><span>{currentTense}</span>
+					</div>
 				</div>
-				<input class="mt-5 w-[76%]" bind:value={inputSentence} />
-			{/if}
+
+				{#if responseField !== ''}
+					<div class="m-5 h-full w-full flex-1 overflow-auto rounded-2xl border bg-white p-3 text-sm" contenteditable="false" bind:innerText={responseField}></div>
+				{/if}
+			</div>
+			<input class="mt-5 w-[76%] max-w-100 bg-gray-800 text-gray-100" bind:value={inputSentence} />
+
 			<div class="w-80% mb-3 flex items-center justify-center gap-3 pt-5">
 				{#if !checking}
-					{#if started}
+					{#if started && currentVerb && inputSentence.trim() != ''}
 						<button class="blue_button flex-5 text-lg!" onclick={gradeChallenge}>Correct My Sentence</button>
 					{/if}
 					<button class="def_button flex-1 text-lg!" onclick={getTest}>{nextButtonText}</button>

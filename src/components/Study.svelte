@@ -102,7 +102,6 @@
 			selectedTense = 'présent';
 		}
 	});
-	//Search appears to be broken for some words, find out why
 </script>
 
 <div class="flex flex-col items-center justify-center">
@@ -116,7 +115,7 @@
 					{#if fullList.length !== 0}
 						{#each list as verb, index}
 							<button
-								class="mt-2 flex w-full flex-col rounded-2xl border-2 border-olive-200 p-2 text-start text-blue-400! hover:cursor-pointer hover:bg-gray-200!"
+								class="mt-2 flex w-full flex-col rounded-2xl border-2 border-olive-200 p-2 text-start text-blue-400 hover:cursor-pointer hover:bg-gray-200! hover:text-blue-800"
 								onclick={() => {
 									pushState(`/study/${verb.infinitive}`, { verb });
 									selectedVerb = verb;
@@ -152,7 +151,7 @@
 			</div>
 		{:else}
 			<div class="mt-10 flex w-110 flex-col items-center justify-center rounded-2xl bg-neutral-300 xl:w-140">
-				<div class="flex h-130 w-full flex-col items-center rounded-2xl bg-amber-50 p-3">
+				<div class="flex h-130 w-full flex-col items-center rounded-2xl bg-gray-200 p-3">
 					<h1 class="flex-1">
 						{#if selectedVerb.pronomial && ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(selectedVerb.infinitive[0])}
 							<span class="text-pink-600">S'</span>
