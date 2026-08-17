@@ -87,7 +87,7 @@
 <div class="flex h-full w-full items-center">
 	<div class=" flex h-185 w-full flex-col items-center rounded-2xl">
 		<div class="mt-10 flex w-full flex-col items-center md:rounded-2xl">
-			<div class="flex w-full max-w-100 flex-1 flex-col gap-3 p-5 text-center text-white sm:rounded-2xl">
+			<div class="flex w-full max-w-100 flex-col gap-3 p-5 text-center text-white sm:rounded-2xl">
 				<h3 class="text-xl!">Write a sentence using...</h3>
 				<div class="flex items-center justify-between border-b border-white">
 					<span class="text-lg text-purple-300">Verb:</span>
@@ -103,10 +103,10 @@
 			</div>
 
 			{#if responseField !== ''}
-				<div class="m-5 h-full w-full flex-1 overflow-auto rounded-2xl border bg-white p-3 text-sm" contenteditable="false" bind:innerText={responseField}></div>
+				<div class="ml2 mr-2 mb-2 h-full w-full max-w-100 overflow-auto rounded-2xl border bg-white p-3 text-sm" contenteditable="false" bind:innerText={responseField}></div>
 			{/if}
 		</div>
-		<input class="mt-5 w-[76%] max-w-100 bg-gray-800 text-gray-100" bind:value={inputSentence} />
+		<input class="mr-2 ml-2 w-[76%] max-w-100 bg-gray-800 text-gray-100" bind:value={inputSentence} />
 
 		<div class="w-80% mb-3 flex items-center justify-center gap-3 pt-5">
 			{#if !checking}

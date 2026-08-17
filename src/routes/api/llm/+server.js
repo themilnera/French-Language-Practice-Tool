@@ -13,6 +13,7 @@ export async function POST({ request }) {
 					{ role: 'system', content: system },
 					{ role: 'user', content: prompt }
 				],
+				max_tokens: 130,
 				temperature: temperature
 			})
 		});
