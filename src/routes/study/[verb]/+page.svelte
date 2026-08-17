@@ -4,7 +4,7 @@
 	let { data } = $props();
 </script>
 
-<div class="overflow-hidden">
+<div class="max-h-[100svh] overflow-y-hidden">
 	<Nav />
 	{#if data}
 		<Study {data} />

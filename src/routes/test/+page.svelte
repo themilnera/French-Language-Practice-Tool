@@ -4,7 +4,9 @@
 	let { data } = $props();
 </script>
 
-<Nav />
-{#if data}
-	<Test {data} />
-{/if}
+<div class="max-h-[100svh] overflow-y-hidden">
+	<Nav />
+	{#if data}
+		<Test {data} />
+	{/if}
+</div>

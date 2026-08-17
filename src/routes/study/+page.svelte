@@ -12,7 +12,9 @@
 	});
 </script>
 
-<Nav />
-{#if data}
-	<Study {data} />
-{/if}
+<div class="max-h-[100svh] overflow-y-hidden">
+	<Nav />
+	{#if data}
+		<Study {data} />
+	{/if}
+</div>

@@ -104,49 +104,51 @@
 	});
 </script>
 
-<div class="flex flex-col items-center justify-center">
-	<div class="mb-10 flex w-full max-w-200 items-center justify-center">
+<div class="flex h-full flex-col items-center justify-center">
+	<div class="mb-10 flex h-full w-full max-w-200 items-center justify-center">
 		{#if !selectedVerb}
-			<div class="color-mid-indigo mt-10 flex h-185 w-full flex-col items-center rounded-2xl border-2 border-gray-700! pb-10">
+			<div class="flex h-full max-h-svh w-full flex-col items-center rounded-2xl">
 				<div class="mt-5 mb-5 self-center">
-					<input placeholder="Find a verb to practice..." bind:value={filterInput} oninput={changeFilter} />
+					<input class="bg-gray-800 text-gray-100 placeholder-gray-400" placeholder="Find a verb to practice..." bind:value={filterInput} oninput={changeFilter} />
 				</div>
-				<div class="flex h-[90%] min-h-0 w-full flex-1 flex-col items-start overflow-auto bg-gray-700 p-5">
-					{#if fullList.length !== 0}
-						{#each list as verb, index}
-							<button
-								class="mt-2 flex w-full flex-col rounded-2xl border-2 border-olive-200 p-2 text-start text-blue-400 hover:cursor-pointer hover:bg-gray-200! hover:text-blue-800"
-								onclick={() => {
-									pushState(`/study/${verb.infinitive}`, { verb });
-									selectedVerb = verb;
-									selectedDefinition = verb.definitions[0].definition;
-									selectedSubject = 'je';
-									selectedTense = 'présent';
-								}}
-							>
-								<span class="mt-4 font-bold">
-									{#if verb.pronomial && ['a', 'e', 'é', 'i', 'o', 'u'].includes(verb.infinitive[0].toLowerCase())}
-										<span class="text-pink-600">S'</span>
-									{:else if verb.pronomial}
-										<span class="text-pink-600">Se&nbsp;</span>
-									{/if}{verb.infinitive}
-								</span>
+				<div class="h-200 max-h-svh rounded-lg border-2 border-gray-800 bg-gray-700 p-2 p-4">
+					<div class="flex h-full min-h-0 w-full flex-1 flex-col items-start overflow-auto rounded-2xl bg-gray-700">
+						{#if fullList.length !== 0}
+							{#each list as verb, index}
+								<button
+									class="mt-2 flex w-full flex-col rounded-2xl border-2 border-olive-200 p-2 text-start text-blue-400 hover:cursor-pointer hover:bg-gray-200! hover:text-blue-800"
+									onclick={() => {
+										pushState(`/study/${verb.infinitive}`, { verb });
+										selectedVerb = verb;
+										selectedDefinition = verb.definitions[0].definition;
+										selectedSubject = 'je';
+										selectedTense = 'présent';
+									}}
+								>
+									<span class="mt-4 font-bold">
+										{#if verb.pronomial && ['a', 'e', 'é', 'i', 'o', 'u'].includes(verb.infinitive[0].toLowerCase())}
+											<span class="text-pink-600">S'</span>
+										{:else if verb.pronomial}
+											<span class="text-pink-600">Se&nbsp;</span>
+										{/if}{verb.infinitive}
+									</span>
 
-								<div class="flex w-full rounded-xl border-2 border-olive-200 bg-slate-400 p-3 text-neutral-900">
-									<div class="ml-auto w-full">
-										<div class="xs:text-[3vw] flex flex-col justify-between text-[17px]">
-											{#each verb.definitions as d}
-												<span class="flex justify-between pt-1"
-													>{d.definition}
-													<span class="text-violet-700">{d.subtype ? `${d.subtype}` : ''}</span></span
-												>
-											{/each}
+									<div class="flex w-full rounded-xl border-2 border-olive-200 bg-slate-400 p-3 text-neutral-900">
+										<div class="ml-auto w-full">
+											<div class="flex flex-col justify-between text-sm">
+												{#each verb.definitions as d}
+													<span class="flex justify-between pt-1"
+														>{d.definition}
+														<span class="text-violet-700">{d.subtype ? `${d.subtype}` : ''}</span></span
+													>
+												{/each}
+											</div>
 										</div>
 									</div>
-								</div>
-							</button>
-						{/each}
-					{/if}
+								</button>
+							{/each}
+						{/if}
+					</div>
 				</div>
 			</div>
 		{:else}
