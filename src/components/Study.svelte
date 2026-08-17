@@ -108,15 +108,15 @@
 <div class="flex flex-col items-center justify-center">
 	<div class="mb-10 flex w-full max-w-200 items-center justify-center">
 		{#if !selectedVerb}
-			<div class="color-des-green mt-10 flex h-185 w-full flex-col items-center rounded-2xl border-2 border-green-900 pb-10">
+			<div class="color-mid-indigo mt-10 flex h-185 w-full flex-col items-center rounded-2xl border-2 border-gray-700! pb-10">
 				<div class="mt-5 mb-5 self-center">
 					<input placeholder="Find a verb to practice..." bind:value={filterInput} oninput={changeFilter} />
 				</div>
-				<div class="flex h-[90%] min-h-0 w-full flex-1 flex-col items-start overflow-auto bg-gray-50 p-5">
+				<div class="flex h-[90%] min-h-0 w-full flex-1 flex-col items-start overflow-auto bg-gray-700 p-5">
 					{#if fullList.length !== 0}
 						{#each list as verb, index}
 							<button
-								class="color-des-2 mt-2 flex w-full flex-col rounded-2xl border-2 border-olive-200 p-2 text-start text-black! hover:cursor-pointer hover:bg-gray-200!"
+								class="mt-2 flex w-full flex-col rounded-2xl border-2 border-olive-200 p-2 text-start text-blue-400! hover:cursor-pointer hover:bg-gray-200!"
 								onclick={() => {
 									pushState(`/study/${verb.infinitive}`, { verb });
 									selectedVerb = verb;
@@ -125,7 +125,7 @@
 									selectedTense = 'présent';
 								}}
 							>
-								<span class="mt-4 font-bold text-blue-800">
+								<span class="mt-4 font-bold">
 									{#if verb.pronomial && ['a', 'e', 'é', 'i', 'o', 'u'].includes(verb.infinitive[0].toLowerCase())}
 										<span class="text-pink-600">S'</span>
 									{:else if verb.pronomial}
@@ -133,7 +133,7 @@
 									{/if}{verb.infinitive}
 								</span>
 
-								<div class="flex w-full rounded-xl border-2 border-olive-200 bg-amber-50 p-3">
+								<div class="flex w-full rounded-xl border-2 border-olive-200 bg-slate-400 p-3 text-neutral-900">
 									<div class="ml-auto w-full">
 										<div class="xs:text-[3vw] flex flex-col justify-between text-[17px]">
 											{#each verb.definitions as d}

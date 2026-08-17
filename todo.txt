@@ -1,13 +1,13 @@
 
 Settings page (API settings)
 
-Making a get for the full verb list every time is excessive,
-we could store the list somewhere to save the trouble 
+Styling overhaul: nav big time, different color scheme? It's a mess
+Mobile fixes
+Feedback for page loading
+Look into what to use for storing the list? It's static after all..
 
-Better visual feedback for the imperative options (tu,vous,nous)
-
-Dynamic styles? Styling overall could use work still
+Better feedback for imperative only options on the study page
+Translate mode (translate a sentence/paragraph choose sentence amount, includes random verbs)
 
 Further down the road:
 Nouns
-Translate mode

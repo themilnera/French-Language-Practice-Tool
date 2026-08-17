@@ -10,19 +10,21 @@
 </script>
 
 <div class="flex h-23 justify-center">
-	<div class="! flex h-full w-200 items-center justify-center gap-5 rounded-b-xl border-r-3 border-b-3 border-l-3 border-olive-700! bg-olive-500!">
-		<button
-			onclick={() => {
-				goto('/study');
-			}}
-			class={slug == 'study' ? 'def_button border-3 border-green-200! bg-green-800!' : 'def_button border-3 border-green-900 bg-green-800!'}>Study Mode</button
-		>
-		<button
-			onclick={() => {
-				if (slug !== 'test') goto('/test');
-			}}
-			class={slug == 'test' ? 'def_button border-3 border-green-200! bg-green-800!' : 'def_button border-3 border-green-900 bg-green-800!'}>Test Mode</button
-		>
-		<button class="w-10 cursor-pointer text-gray-200 hover:text-gray-800"><SettingsIcon /></button>
+	<div class="color-lighter-indigo flex h-full w-200 items-center justify-between gap-5 rounded-b-lg border-r-2 border-b-2 border-l-2 border-gray-700!">
+		<div class="ml-10 flex gap-5">
+			<button
+				onclick={() => {
+					setTimeout(() => goto('/study'), 0);
+				}}
+				class={slug == 'study' ? 'cursor-pointer border-b-2 p-2 text-shadow-blue-50 hover:text-shadow-xs' : 'cursor-pointer p-2 text-shadow-blue-50 hover:text-shadow-xs'}>Study Mode</button
+			>
+			<button
+				onclick={() => {
+					setTimeout(() => goto('/test'), 0);
+				}}
+				class={slug == 'test' ? 'cursor-pointer border-b-2 p-2 text-shadow-blue-50 hover:text-shadow-xs' : 'cursor-pointer p-2 text-shadow-blue-50 hover:text-shadow-xs'}>Test Mode</button
+			>
+		</div>
+		<button class="mr-10 w-10 cursor-pointer text-gray-200 hover:text-gray-800"><SettingsIcon /></button>
 	</div>
 </div>
