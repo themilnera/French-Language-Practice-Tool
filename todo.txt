@@ -1,11 +1,12 @@
 
-Settings page (API settings)
 
-Styling overhaul: nav big time, different color scheme? It's a mess
-Mobile fixes
-Feedback for page loading
-Look into what to use for storing the list? It's static after all..
+Problems:
+The study scroll box doesn't seem to go all the way to the bottom
+The search needs to unrender the div when no results return
+You can't search for "se s..." for example.
 
+Features:
+Options for verb test? Let you pick the tense you want?
 Better feedback for imperative only options on the study page
 Translate mode (translate a sentence/paragraph choose sentence amount, includes random verbs)
 
