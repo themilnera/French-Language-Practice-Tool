@@ -1,9 +1,9 @@
 
 
 Problems:
-The study scroll box doesn't seem to go all the way to the bottom
 The search needs to unrender the div when no results return
 You can't search for "se s..." for example.
+Search results shrink when less results return
 
 Features:
 Options for verb test? Let you pick the tense you want?

@@ -61,16 +61,16 @@
 		list = [];
 		if (filter != '') {
 			fullList.forEach((verb) => {
+				let cleanFilter = removeAccents(filter.toLowerCase());
 				if (removeAccents(verb.infinitive).toLowerCase().startsWith(filter)) {
 					list.push(verb);
 				} else if (verb.pronomial) {
-					if (filter == 's' || filter == 'se' || filter == "s'") {
+					if (cleanFilter.startsWith('s')) {
+						cleanFilter = cleanFilter.replace(/(^s)[e']\s*/, '');
+						console.log(cleanFilter);
+					}
+					if (verb.infinitive.toLowerCase().startsWith(cleanFilter)) {
 						list.push(verb);
-					} else {
-						let pr = filter.replace(/(^s')\s*(\w+)/ || /(^s)\s*(\w+)/ || /(^se)\s*(\w+)/, '');
-						if (verb.infinitive.toLowerCase().startsWith(pr.trim())) {
-							list.push(verb);
-						}
 					}
 				}
 			});
@@ -111,7 +111,7 @@
 				<div class="mt-5 mb-5 self-center">
 					<input class="bg-gray-800 text-gray-100 placeholder-gray-400" placeholder="Find a verb to practice..." bind:value={filterInput} oninput={changeFilter} />
 				</div>
-				<div class="h-200 max-h-svh rounded-lg border-2 border-gray-800 bg-gray-700 p-2 p-4">
+				<div class="h-190 max-h-svh w-full rounded-lg border-2 border-gray-800 bg-gray-700 p-2 p-4">
 					<div class="flex h-full min-h-0 w-full flex-1 flex-col items-start overflow-auto rounded-2xl bg-gray-700">
 						{#if fullList.length !== 0}
 							{#each list as verb, index}
